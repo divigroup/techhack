@@ -84,10 +84,20 @@ export default function Login({ navigation }) {
             gap: 1,
           }}
         >
-          <Image
+          <Text
+            style={{
+              color: "#d3d3d3",
+              fontSize: 80,
+              fontWeight: "bold",
+              marginBottom: 80,
+            }}
+          >
+            Sign In
+          </Text>
+          {/* <Image
             source={require("../../assets/favicon.png")}
             style={styles.image}
-          ></Image>
+          ></Image> */}
           {errorflag ? <Text style={{ color: "red" }}>{error}</Text> : <></>}
           <TextInput
             style={styles.input}
@@ -105,12 +115,18 @@ export default function Login({ navigation }) {
               setError(""), onSubmitHandler(), Boiler();
             }}
           >
-            <Text>SignIn</Text>
+            <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
+          <Text
+            style={{ color: "#000000", marginBottom: 5 }}
+            // onPress={() => navigation.navigate("")}
+          >
+            Forgot Password?
+          </Text>
           <Text>
             Don't have a account?{" "}
             <Text
-              style={{ color: "blue" }}
+              style={{ color: "#1167b1" }}
               onPress={() => navigation.navigate("Signup")}
             >
               Signup
@@ -126,9 +142,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
+    backgroundColor: "white",
   },
   scrollView: {
-    backgroundColor: "pink",
+    backgroundColor: "white",
     marginHorizontal: 20,
   },
   text: {
@@ -140,20 +157,26 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   input: {
+    color: "#000000",
     padding: 10,
     marginVertical: 2,
     width: "90%",
-    borderColor: "black",
+    marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 20,
+    borderWidth: 2,
+    alignItems: "stretch",
+    borderColor: "#000000",
   },
   button: {
     padding: 13,
     paddingHorizontal: 30,
     marginTop: 10,
-    backgroundColor: "grey",
-    borderRadius: 20,
+    width: "50%",
+    color: "white",
+    backgroundColor: "#1167b1",
+    borderRadius: 40,
     marginBottom: 10,
   },
 });
