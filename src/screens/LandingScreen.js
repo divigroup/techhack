@@ -6,10 +6,20 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const LandingScreen = ({ navigation }) => {
+  const [batch, setBatch] = useState([]);
+  const Boiler = async () => {
+    const batch = await AsyncStorage.getItem("batch");
+    setBatch(batch);
+  };
+
+  useEffect(() => {
+    Boiler();
+  }, [navigation]);
   const navigate = (page) => {
     navigation.navigate(page);
   };

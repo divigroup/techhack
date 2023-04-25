@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 import Quiztemp from "./component/Quiztemp";
+import AsyncStorage from "@react-native-community/async-storage";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const questions = [
@@ -82,7 +83,29 @@ const questions = [
     correctAnswer: "D. SyntaxError",
   },
 ];
-const C = ({ navigation }) => {
+const C = ({ route, navigation }) => {
+  const [lastLevel, setLastlevel] = useState(-1);
+  const Boiler = async () => {
+    const batch = await AsyncStorage.getItem("batch");
+
+    const batchArray = batch.split(",");
+
+    for (let i = 0; i < batchArray.length; i++) {
+      if (batchArray[i] === "cexpert") {
+        setLastlevel(3);
+      } else if (batchArray[i] === "chard") {
+        setLastlevel(2);
+      } else if (batchArray[i] === "cmedium") {
+        setLastlevel(1);
+      } else if (batchArray[i] === "ceasy") {
+        setLastlevel(0);
+      }
+    }
+  };
+
+  useEffect(() => {
+    Boiler();
+  }, [navigation]);
   const [level, setLevel] = useState("");
   if (level === "") {
     return (
@@ -98,7 +121,9 @@ const C = ({ navigation }) => {
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
-            setLevel("medium");
+            if (lastLevel >= 0) {
+              setLevel("medium");
+            }
           }}
         >
           <Text>Medium</Text>
@@ -106,7 +131,9 @@ const C = ({ navigation }) => {
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
-            setLevel("hard");
+            if (lastLevel >= 1) {
+              setLevel("hard");
+            }
           }}
         >
           <Text>Hard</Text>
@@ -114,7 +141,9 @@ const C = ({ navigation }) => {
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
-            setLevel("expert");
+            if (lastLevel >= 2) {
+              setLevel("expert");
+            }
           }}
         >
           <Text>Expert</Text>

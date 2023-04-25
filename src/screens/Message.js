@@ -18,6 +18,7 @@ import LandingScreen from "./LandingScreen";
 import LeftheaderItems from "./LeftheaderItems";
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
+
 export default function Message({ navigation }) {
   const menu = <LeftheaderItems navigation={navigation} />;
   const h = StatusBar.currentHeight;

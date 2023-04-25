@@ -14,7 +14,7 @@ import Python from "./src/screens/quiz/Python";
 import C from "./src/screens/quiz/C";
 import Java from "./src/screens/quiz/Java";
 import Analysis from "./src/screens/quiz/component/Analysis";
-
+import Profile from "./src/screens/Profile";
 const Stack = createNativeStackNavigator();
 
 function App({ navigation }) {
@@ -28,6 +28,7 @@ function App({ navigation }) {
         <Stack.Screen name="c" component={C} />
         <Stack.Screen name="java" component={Java} />
         <Stack.Screen name="analysis" component={Analysis} />
+        <Stack.Screen name="profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

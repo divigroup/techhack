@@ -17,6 +17,9 @@ export default function LeftheaderItems({ navigation }) {
   const LogOut = async () => {
     try {
       await AsyncStorage.removeItem("email");
+      await AsyncStorage.removeItem("batch");
+      await AsyncStorage.removeItem("firstname");
+      await AsyncStorage.removeItem("lastname");
     } catch (e) {
       console.log("logout failure");
     }
@@ -64,6 +67,13 @@ export default function LeftheaderItems({ navigation }) {
             justifyContent: "center",
           }}
         >
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("profile");
+            }}
+          >
+            <Text style={{ fontSize: 25, fontWeight: "bold" }}>Profile</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               LogOut(), setClick(1);

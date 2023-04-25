@@ -56,6 +56,15 @@ export default function Login({ navigation }) {
             }
           } else {
             AsyncStorage.setItem("email", String(data["result"]["email"]));
+            AsyncStorage.setItem("batch", String(data["result"]["batch"]));
+            AsyncStorage.setItem(
+              "firstname",
+              String(data["result"]["firstName"])
+            );
+            AsyncStorage.setItem(
+              "lastname",
+              String(data["result"]["lastName"])
+            );
           }
         });
     }
