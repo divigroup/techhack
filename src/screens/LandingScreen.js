@@ -21,7 +21,7 @@ const LandingScreen = ({ navigation }) => {
           navigate("python");
         }}
       >
-        <Text>Python</Text>
+        <Text style={{color: "white", fontWeight: "bold"}}>Python</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.Button}
@@ -29,7 +29,7 @@ const LandingScreen = ({ navigation }) => {
           navigate("c");
         }}
       >
-        <Text>C</Text>
+        <Text style={{color: "white", fontWeight: "bold"}}>C</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.Button}
@@ -37,7 +37,7 @@ const LandingScreen = ({ navigation }) => {
           navigate("java");
         }}
       >
-        <Text>Java</Text>
+        <Text style={{color: "white", fontWeight: "bold"}}>Java</Text>
       </TouchableOpacity>
     </View>
   );
@@ -53,12 +53,11 @@ const styles = StyleSheet.create({
   },
   Button: {
     justifyContent: "center",
-
+    marginBottom: 20,
     alignItems: "center",
-    backgroundColor: "lightgreen",
+    backgroundColor:"#003166",
     padding: 10,
     width: windowWidth * 0.9,
-    marginBottom: 4,
     borderRadius: 10,
     height: windowHeight * 0.1,
   },

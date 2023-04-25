@@ -108,11 +108,12 @@ export default function Signup({ navigation }) {
               </DialogContent>
             </View>
           </Dialog>
+          <Text style={{ color:"#d3d3d3", fontSize: 80, fontWeight: "bold", marginBottom: 80}}>Sign Up</Text>
 
-          <Image
+          {/* <Image
             source={require("../../assets/favicon.png")}
             style={styles.image}
-          ></Image>
+          ></Image> */}
 
           {allfielderror ? (
             <Text style={{ color: "red" }}>{error}</Text>
@@ -145,7 +146,7 @@ export default function Signup({ navigation }) {
             />
             {showPassword ? (
               <Image
-                style={{ width: "10%", height: "90%" }}
+                style={{ width: "10%", height: "50%",marginLeft: 20}}
                 source={require("../../assets/view.png")}
                 onPress={() => {
                   setShowPassword(false);
@@ -153,7 +154,7 @@ export default function Signup({ navigation }) {
               ></Image>
             ) : (
               <Image
-                style={{ width: "10%", height: "90%" }}
+                style={{ width: "10%", height: "50%",marginLeft: 20}}
                 source={require("../../assets/hide.png")}
                 onPress={() => {
                   setShowPassword(true);
@@ -168,15 +169,14 @@ export default function Signup({ navigation }) {
               setError(""), onSubmitHandler();
             }}
           >
-            <Text>Register</Text>
+            <Text style={{color: "white",textAlign:"center"}}>Register</Text>
           </TouchableOpacity>
           <Text>
-            Have a account?
-            <Text
+            Have a account? <Text
               style={{ color: "blue" }}
               onPress={() => navigation.navigate("Login")}
             >
-              Login
+               Login
             </Text>
           </Text>
         </View>
@@ -189,9 +189,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
+    backgroundColor:"white",
   },
   scrollView: {
-    backgroundColor: "pink",
+    backgroundColor: "white",
     marginHorizontal: 20,
   },
   text: {
@@ -201,16 +202,30 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-end",
     backgroundColor: "white",
-    padding: 10,
+    padding: 5,
     marginVertical: 2,
-
     borderColor: "black",
     alignItems: "center",
 
     borderRadius: 10,
+    marginVertical: 2,
+    marginLeft: 2,
+    width: "80%",
+    borderWidth: 2,
+    borderColor: "black",
+    marginBottom: 15,
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 20,
+    width: "90%",
+    height: "14%",
+    borderRadius: 20,
   },
 
   password: {
+    padding: 10,
+    marginVertical: 2,
+    marginLeft: 2,
     width: "80%",
   },
   image: {
@@ -221,26 +236,33 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     marginVertical: 2,
+     marginLeft: -4,
     width: "90%",
+    borderWidth: 2,
     borderColor: "black",
+    marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   smallinput: {
     padding: 10,
     marginVertical: 2,
+    marginLeft: -4,
+    marginRight: 5,
     width: "50%",
+    borderWidth: 2,
     borderColor: "black",
     alignItems: "center",
+    marginBottom: 15,
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 20,
   },
   button: {
     padding: 13,
     paddingHorizontal: 30,
     marginTop: 10,
-    backgroundColor: "grey",
+    backgroundColor: "#1167b1",
     borderRadius: 20,
     marginBottom: 10,
   },

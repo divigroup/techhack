@@ -18,11 +18,19 @@ import LandingScreen from "./LandingScreen";
 import LeftheaderItems from "./LeftheaderItems";
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
+import {SliderBox}  from "react-native-image-slider-box";
 export default function Message({ navigation }) {
   const menu = <LeftheaderItems navigation={navigation} />;
   const h = StatusBar.currentHeight;
   const [openHeader, setOpenHeader] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const images = [
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+  ]
 
   return (
     <SideMenu
@@ -37,6 +45,7 @@ export default function Message({ navigation }) {
           paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         }}
       >
+        
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <TouchableOpacity
             style={{
@@ -98,6 +107,21 @@ export default function Message({ navigation }) {
             </View>
           </Modal>
         </View>
+        <View>
+          <SliderBox
+          images={images}
+          dotColor="white"
+          inactiveDotColor="black"
+          dotStyle={{height: 20, width:20,borderRadius:50}}
+          // imageLoadingColor="black"
+          autoplay={true}
+          autoplayInterval={4000}
+          circleLoop={true}
+          onCurrentImagePressed={(index) => alert(index+1)}
+          firstItem={4}
+          
+          />
+        </View>
         <LandingScreen navigation={navigation} />
 
         {/* <View style={styles.container}>
@@ -123,6 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "#d3d3d3"
   },
   input: {
     padding: 10,
