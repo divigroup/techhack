@@ -18,40 +18,20 @@ import LandingScreen from "./LandingScreen";
 import LeftheaderItems from "./LeftheaderItems";
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import Slideshow from "react-native-image-slider-show";
+// import { SliderBox } from "react-native-image-slider-box";
 
 export default function Message({ navigation }) {
   const menu = <LeftheaderItems navigation={navigation} />;
   const h = StatusBar.currentHeight;
   const [openHeader, setOpenHeader] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
-  const dataSource = [
-    {
-      title: "Burger 1",
-      caption: "Original  Cheezy Meat",
-      url: "https://assets.epicurious.com/photos/5c745a108918ee7ab68daf79/5:4/w_3129,h_2503,c_limit/Smashburger-recipe-120219.jpg",
-    },
-    {
-      title: "Burger 2",
-      caption: "100% Original Beef",
-      url: "https://www.thespruceeats.com/thmb/vJUFf6L4p8y9Cn_1pE9Z7Ua9uok=/3000x2001/filters:fill(auto,1)/indian-style-burger-1957599-hero-01-266103a4bb4e4ee7b5feb4da2d2e99da.jpg",
-    },
-    {
-      title: "Burger 3",
-      caption: "Mouthfull Of Happiness",
-      url: "https://www.thespruceeats.com/thmb/l4w6PvMqsz1EjueCAh_foPmYafM=/3456x3456/smart/filters:no_upscale()/garlic-burger-patties-333503-hero-01-e4df660ff27b4e5194fdff6d703a4f83.jpg",
-    },
+  const images = [
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
+    require("../../assets/landingimage.jpg"),
   ];
-  const [position, setPosition] = useState(0);
-
-  useEffect(() => {
-    const toggle = setInterval(() => {
-      setPosition(position === dataSource.length - 1 ? 0 : position + 1);
-    }, 3000);
-
-    return () => clearInterval(toggle);
-  });
 
   return (
     <SideMenu
@@ -66,7 +46,15 @@ export default function Message({ navigation }) {
           paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
         }}
       >
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            backgroundColor: "#b24bf3",
+            height: 50,
+            marginBottom: 10,
+          }}
+        >
           <TouchableOpacity
             style={{
               width: "12%",
@@ -80,11 +68,11 @@ export default function Message({ navigation }) {
             }}
           >
             <Image
-              source={require("../../assets/control.png")}
+              source={require("../../assets/menu.png")}
               style={styles.icon}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               width: "12%",
               height: "15%",
@@ -101,7 +89,6 @@ export default function Message({ navigation }) {
               style={styles.icon}
             ></Image>
           </TouchableOpacity>
-
           <Modal
             animationType="slide"
             transparent={true}
@@ -126,7 +113,7 @@ export default function Message({ navigation }) {
                 <TouchableOpacity></TouchableOpacity>
               </View>
             </View>
-          </Modal>
+          </Modal> */}
         </View>
         {/* <View>
           <SliderBox
@@ -142,20 +129,6 @@ export default function Message({ navigation }) {
             firstItem={4}
           />
         </View> */}
-        <View
-          style={{
-            padding: 15,
-            borderRadius: 100,
-            shadowColor: "black",
-            shadowOpacity: 10,
-          }}
-        >
-          <Slideshow
-            position={position}
-            dataSource={dataSource}
-            arrowSize={0}
-          />
-        </View>
         <LandingScreen navigation={navigation} />
 
         {/* <View style={styles.container}>
@@ -198,6 +171,7 @@ const styles = StyleSheet.create({
     height: "25%",
     borderRadius: 3,
     padding: 16,
+    marginTop: 8,
   },
   centeredView: {
     flex: 1,
