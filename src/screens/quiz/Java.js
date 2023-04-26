@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
+
 import Quiztemp from "./component/Quiztemp";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -85,7 +87,30 @@ const questions = [
     correctAnswer: "D. SyntaxError",
   },
 ];
-const Java = ({ navigation }) => {
+const Java = ({ route, navigation }) => {
+  const [lastLevel, setLastlevel] = useState(-1);
+  const Boiler = async () => {
+    const batch = await AsyncStorage.getItem("batch");
+
+    const batchArray = batch.split(",");
+
+    for (let i = 0; i < batchArray.length; i++) {
+      if (batchArray[i] === "javaexpert") {
+        setLastlevel(3);
+      } else if (batchArray[i] === "javahard") {
+        setLastlevel(2);
+      } else if (batchArray[i] === "javamedium") {
+        setLastlevel(1);
+      } else if (batchArray[i] === "javaeasy") {
+        setLastlevel(0);
+      }
+    }
+  };
+
+  useEffect(() => {
+    Boiler();
+  }, [navigation]);
+
   const [level, setLevel] = useState("");
   if (level === "") {
     return (
@@ -107,7 +132,9 @@ const Java = ({ navigation }) => {
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
-            setLevel("medium");
+            if (lastLevel >= 0) {
+              setLevel("medium");
+            }
           }}
         >
           <Text style={{fontWeight:"bold",fontSize:30}}>Medium</Text>
@@ -115,7 +142,9 @@ const Java = ({ navigation }) => {
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
-            setLevel("hard");
+            if (lastLevel >= 1) {
+              setLevel("hard");
+            }
           }}
         >
           <Text style={{fontWeight:"bold",fontSize:30}}>Hard</Text>
@@ -127,7 +156,7 @@ const Java = ({ navigation }) => {
     return (
       <Quiztemp
         level={level}
-        subject="c"
+        subject="java"
         questions={questions}
         style={{
           flex: 1,

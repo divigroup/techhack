@@ -68,7 +68,7 @@ const Quiztemp = ({ level, subject, questions }) => {
   if (analysis === true) {
     return (
       <Analysis
-        subject="Python"
+        subject={subject}
         level={level}
         Score={score}
         Totalquestion={questions.length}

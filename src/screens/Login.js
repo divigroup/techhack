@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
       setErrorflag(true);
     } else {
       console.log("entered");
-      fetch("http://192.168.1.39:3000/in/login", {
+      fetch("http://192.168.1.36:3000/in/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,6 +56,15 @@ export default function Login({ navigation }) {
             }
           } else {
             AsyncStorage.setItem("email", String(data["result"]["email"]));
+            AsyncStorage.setItem("batch", String(data["result"]["batch"]));
+            AsyncStorage.setItem(
+              "firstname",
+              String(data["result"]["firstName"])
+            );
+            AsyncStorage.setItem(
+              "lastname",
+              String(data["result"]["lastName"])
+            );
           }
         });
     }
@@ -75,7 +84,16 @@ export default function Login({ navigation }) {
             gap: 1,
           }}
         >
-          <Text style={{ color:"#d3d3d3", fontSize: 80, fontWeight: "bold", marginBottom: 80}}>Sign In</Text>
+          <Text
+            style={{
+              color: "#d3d3d3",
+              fontSize: 80,
+              fontWeight: "bold",
+              marginBottom: 80,
+            }}
+          >
+            Sign In
+          </Text>
           {/* <Image
             source={require("../../assets/favicon.png")}
             style={styles.image}
@@ -97,16 +115,16 @@ export default function Login({ navigation }) {
               setError(""), onSubmitHandler(), Boiler();
             }}
           >
-            <Text style={{color: "white",textAlign:"center"}}>Sign In</Text>
+            <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
           <Text
-              style={{ color: "#000000",marginBottom: 5}}
-              // onPress={() => navigation.navigate("")}
-            >
-              Forgot Password?
-            </Text>
+            style={{ color: "#000000", marginBottom: 5 }}
+            // onPress={() => navigation.navigate("")}
+          >
+            Forgot Password?
+          </Text>
           <Text>
-            Don't have a account? {" "}
+            Don't have a account?{" "}
             <Text
               style={{ color: "#1167b1" }}
               onPress={() => navigation.navigate("Signup")}
@@ -114,7 +132,6 @@ export default function Login({ navigation }) {
               Signup
             </Text>
           </Text>
-          
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -125,7 +142,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
-    backgroundColor:"white",
+    backgroundColor: "white",
   },
   scrollView: {
     backgroundColor: "white",
