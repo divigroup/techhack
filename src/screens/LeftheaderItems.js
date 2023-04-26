@@ -45,7 +45,7 @@ export default function LeftheaderItems({ navigation }) {
       <View>
         <View style={{ alignItems: "center", padding: 10 }}>
           <Image
-            source={require("../../assets/profile.jpeg")}
+            source={require("../../assets/profile.jpg")}
             style={{
               borderRadius: 90,
               resizeMode: "contain",
@@ -69,7 +69,7 @@ export default function LeftheaderItems({ navigation }) {
               LogOut(), setClick(1);
             }}
           >
-            <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 32, fontWeight: "bold",paddingLeft:90}}>
               Logout-{String(">")}
             </Text>
           </TouchableOpacity>
@@ -80,7 +80,7 @@ export default function LeftheaderItems({ navigation }) {
         style={{
           width: "100%",
           height: 50,
-          backgroundColor: "#EE5407",
+          backgroundColor: "#b24bf3",
           justifyContent: "center",
           alignItems: "center",
           position: "absolute", //Here is the trick

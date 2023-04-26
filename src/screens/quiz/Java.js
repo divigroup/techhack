@@ -90,13 +90,19 @@ const Java = ({ navigation }) => {
   if (level === "") {
     return (
       <View style={styles.container}>
+        <View>
+          <Text style={{fontWeight:"bold",fontSize:50,marginBottom:30}}>Javascript</Text>
+        </View>
+        <View>
+          <Text style={{fontWeight:"bold",fontSize:30,marginBottom:25}}>LEVELS</Text>
+        </View>
         <TouchableOpacity
           style={styles.Button}
           onPress={() => {
             setLevel("easy");
           }}
         >
-          <Text>Easy</Text>
+          <Text style={{fontWeight:"bold",fontSize:30}}>Easy</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.Button}
@@ -104,7 +110,7 @@ const Java = ({ navigation }) => {
             setLevel("medium");
           }}
         >
-          <Text>Medium</Text>
+          <Text style={{fontWeight:"bold",fontSize:30}}>Medium</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.Button}
@@ -112,16 +118,9 @@ const Java = ({ navigation }) => {
             setLevel("hard");
           }}
         >
-          <Text>Hard</Text>
+          <Text style={{fontWeight:"bold",fontSize:30}}>Hard</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.Button}
-          onPress={() => {
-            setLevel("expert");
-          }}
-        >
-          <Text>Expert</Text>
-        </TouchableOpacity>
+        
       </View>
     );
   } else {
@@ -153,12 +152,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     alignItems: "center",
-    backgroundColor: "lightgreen",
+    backgroundColor: "#b24bf3",
     padding: 10,
     width: windowWidth * 0.9,
     marginBottom: 4,
     borderRadius: 10,
-    height: windowHeight * 0.1,
+    height: windowHeight * 0.15,
   },
 });
 export default Java;

@@ -18,20 +18,11 @@ import LandingScreen from "./LandingScreen";
 import LeftheaderItems from "./LeftheaderItems";
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
-import {SliderBox}  from "react-native-image-slider-box";
 export default function Message({ navigation }) {
   const menu = <LeftheaderItems navigation={navigation} />;
   const h = StatusBar.currentHeight;
   const [openHeader, setOpenHeader] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  const images = [
-    require("../../assets/landingimage.jpg"),
-    require("../../assets/landingimage.jpg"),
-    require("../../assets/landingimage.jpg"),
-    require("../../assets/landingimage.jpg"),
-    require("../../assets/landingimage.jpg"),
-  ]
-
   return (
     <SideMenu
       menu={menu}
@@ -46,7 +37,7 @@ export default function Message({ navigation }) {
         }}
       >
         
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#b24bf3", height: 50, marginBottom: 10 }}>
           <TouchableOpacity
             style={{
               width: "12%",
@@ -60,11 +51,11 @@ export default function Message({ navigation }) {
             }}
           >
             <Image
-              source={require("../../assets/control.png")}
+              source={require("../../assets/menu.png")}
               style={styles.icon}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               width: "12%",
               height: "15%",
@@ -80,8 +71,8 @@ export default function Message({ navigation }) {
               source={require("../../assets/add-group.png")}
               style={styles.icon}
             ></Image>
-          </TouchableOpacity>
-          <Modal
+          </TouchableOpacity> */}
+          {/* <Modal
             animationType="slide"
             transparent={true}
             visible={modalVisible}
@@ -105,23 +96,10 @@ export default function Message({ navigation }) {
                 <TouchableOpacity></TouchableOpacity>
               </View>
             </View>
-          </Modal>
+          </Modal> */}
         </View>
-        <View>
-          <SliderBox
-          images={images}
-          dotColor="white"
-          inactiveDotColor="black"
-          dotStyle={{height: 20, width:20,borderRadius:50}}
-          // imageLoadingColor="black"
-          autoplay={true}
-          autoplayInterval={4000}
-          circleLoop={true}
-          onCurrentImagePressed={(index) => alert(index+1)}
-          firstItem={4}
-          
-          />
-        </View>
+    
+
         <LandingScreen navigation={navigation} />
 
         {/* <View style={styles.container}>
@@ -164,6 +142,7 @@ const styles = StyleSheet.create({
     height: "25%",
     borderRadius: 3,
     padding: 16,
+    marginTop: 8
   },
   centeredView: {
     flex: 1,
