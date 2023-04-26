@@ -28,7 +28,7 @@ export default function LeftheaderItems({ navigation }) {
     const email = await AsyncStorage.getItem("email");
 
     if (!email) {
-      navigation.replace("Login");
+      navigation.replace("verification");
     } else {
       setEmail(email);
     }
@@ -36,7 +36,7 @@ export default function LeftheaderItems({ navigation }) {
 
   useEffect(() => {
     Boiler();
-  }, [email, click]);
+  });
   return (
     <SafeAreaView
       style={{
