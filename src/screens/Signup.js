@@ -37,7 +37,7 @@ export default function Signup({ navigation }) {
         email,
         password,
       };
-      fetch("http://192.168.1.36:5000/in/signup", {
+      fetch("http://192.168.1.36:3000/in/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +108,16 @@ export default function Signup({ navigation }) {
               </DialogContent>
             </View>
           </Dialog>
-          <Text style={{ color:"#d3d3d3", fontSize: 80, fontWeight: "bold", marginBottom: 80}}>Sign Up</Text>
+          <Text
+            style={{
+              color: "#d3d3d3",
+              fontSize: 80,
+              fontWeight: "bold",
+              marginBottom: 80,
+            }}
+          >
+            Sign Up
+          </Text>
 
           {/* <Image
             source={require("../../assets/favicon.png")}
@@ -146,7 +155,7 @@ export default function Signup({ navigation }) {
             />
             {showPassword ? (
               <Image
-                style={{ width: "10%", height: "50%",marginLeft: 20}}
+                style={{ width: "10%", height: "50%", marginLeft: 20 }}
                 source={require("../../assets/view.png")}
                 onPress={() => {
                   setShowPassword(false);
@@ -154,7 +163,7 @@ export default function Signup({ navigation }) {
               ></Image>
             ) : (
               <Image
-                style={{ width: "10%", height: "50%",marginLeft: 20}}
+                style={{ width: "10%", height: "50%", marginLeft: 20 }}
                 source={require("../../assets/hide.png")}
                 onPress={() => {
                   setShowPassword(true);
@@ -169,14 +178,17 @@ export default function Signup({ navigation }) {
               setError(""), onSubmitHandler();
             }}
           >
-            <Text style={{color: "white",textAlign:"center"}}>Register</Text>
+            <Text style={{ color: "white", textAlign: "center" }}>
+              Register
+            </Text>
           </TouchableOpacity>
           <Text>
-            Have a account? <Text
+            Have a account?{" "}
+            <Text
               style={{ color: "blue" }}
               onPress={() => navigation.navigate("Login")}
             >
-               Login
+              Login
             </Text>
           </Text>
         </View>
@@ -189,7 +201,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
-    backgroundColor:"white",
+    backgroundColor: "white",
   },
   scrollView: {
     backgroundColor: "white",
@@ -236,7 +248,7 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     marginVertical: 2,
-     marginLeft: -4,
+    marginLeft: -4,
     width: "90%",
     borderWidth: 2,
     borderColor: "black",

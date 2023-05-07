@@ -86,12 +86,13 @@ const questions = [
   },
 ];
 const Python = ({ navigation }) => {
+  // const [questions, setQuestions] = useState();
+
   const [lastLevel, setLastlevel] = useState(-1);
   const Boiler = async () => {
     const batch = await AsyncStorage.getItem("batch");
-
     const batchArray = batch.split(",");
-    let lastLevel = -1;
+
     for (let i = 0; i < batchArray.length; i++) {
       if (batchArray[i] === "pythonexpert") {
         setLastlevel(3);
@@ -114,10 +115,14 @@ const Python = ({ navigation }) => {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={{fontWeight:"bold",fontSize:50,marginBottom:30}}>Python</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 50, marginBottom: 30 }}>
+            Python
+          </Text>
         </View>
         <View>
-          <Text style={{fontWeight:"bold",fontSize:30,marginBottom:25}}>LEVELS</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, marginBottom: 25 }}>
+            LEVELS
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.Button}
@@ -125,7 +130,7 @@ const Python = ({ navigation }) => {
             setLevel("easy");
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Easy</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Easy</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.Button}
@@ -135,7 +140,7 @@ const Python = ({ navigation }) => {
             }
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Medium</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Medium</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.Button}
@@ -145,9 +150,8 @@ const Python = ({ navigation }) => {
             }
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Hard</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Hard</Text>
         </TouchableOpacity>
-    
       </View>
     );
   } else {

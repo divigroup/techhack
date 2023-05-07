@@ -12,7 +12,6 @@ import {
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
-// import { imag } from "../../assets/favicon.png";
 export default function Login({ navigation }) {
   const Boiler = async () => {
     const email = await AsyncStorage.getItem("email");
@@ -53,6 +52,7 @@ export default function Login({ navigation }) {
               setErrorflag(true);
             }
           } else {
+            AsyncStorage.setItem("password", password);
             AsyncStorage.setItem("email", String(data["result"]["email"]));
             AsyncStorage.setItem("batch", String(data["result"]["batch"]));
             AsyncStorage.setItem(
