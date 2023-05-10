@@ -34,7 +34,11 @@ export default function Profile({ navigation }) {
     const lastname = await AsyncStorage.getItem("lastname");
     const name = firstname + " " + lastname;
     const email = await AsyncStorage.getItem("email");
-    const batchArray = batch.split(",");
+    let batchArray = [];
+    if (batch) {
+      batchArray = batch.split(",");
+    }
+
     for (let i = 0; i < batchArray.length; i++) {
       let im = batchArray[i];
       if (im.length < 20) {

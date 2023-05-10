@@ -91,7 +91,12 @@ const Python = ({ navigation }) => {
   const [lastLevel, setLastlevel] = useState(-1);
   const Boiler = async () => {
     const batch = await AsyncStorage.getItem("batch");
-    const batchArray = batch.split(",");
+    let batchArray = [];
+
+    if (batch) {
+      console.log(batch);
+      batchArray = batch.split(",");
+    }
 
     for (let i = 0; i < batchArray.length; i++) {
       if (batchArray[i] === "pythonexpert") {

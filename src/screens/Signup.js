@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { TextInput } from "react-native-gesture-handler";
+import { server } from "../utils/credentials";
 
 const API_URL =
   Platform.OS === "ios" ? "http://localhost:3000" : "http://10.0.2.2:3000";
@@ -37,7 +38,7 @@ export default function Signup({ navigation }) {
         email,
         password,
       };
-      fetch("http://192.168.1.36:3000/in/signup", {
+      fetch(`${server + "signup"} `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

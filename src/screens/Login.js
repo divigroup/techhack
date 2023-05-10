@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
+import { server } from "../utils/credentials";
 export default function Login({ navigation }) {
   const Boiler = async () => {
     const email = await AsyncStorage.getItem("email");
@@ -30,7 +31,7 @@ export default function Login({ navigation }) {
       setErrorflag(true);
     } else {
       console.log("entered");
-      fetch("http://192.168.1.36:3000/in/login", {
+      fetch(`${server + "login"} `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +108,7 @@ export default function Login({ navigation }) {
           {errorflag ? <Text style={{ color: "red" }}>{error}</Text> : <></>}
           <TextInput
             style={styles.input}
-            placeholder="Email/Phone"
+            placeholder="Email"
             onChangeText={setEmail}
           ></TextInput>
           <TextInput
@@ -125,7 +126,7 @@ export default function Login({ navigation }) {
           </TouchableOpacity>
           <Text
             style={{ color: "#000000", marginBottom: 5 }}
-            // onPress={() => navigation.navigate("")}
+            onPress={() => navigation.navigate("forgotpassword")}
           >
             Forgot Password?
           </Text>

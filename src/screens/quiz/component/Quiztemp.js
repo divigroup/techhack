@@ -13,6 +13,7 @@ import Answer from "./Answer";
 import { Svg, Circle, Text as SvgText } from "react-native-svg";
 
 import Analysis from "./Analysis";
+import { server } from "../../../utils/credentials";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -20,7 +21,7 @@ const windowHeight = Dimensions.get("window").height;
 const Quiztemp = ({ level, subject }) => {
   const [questions, setQuestion] = useState([{}]);
   const ques = async () => {
-    await fetch("http://192.168.1.36:3000/in/question", {
+    await fetch(`${server + "question"} `, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +35,7 @@ const Quiztemp = ({ level, subject }) => {
       .then((data) => setQuestion(data.data));
   };
   useEffect(() => {
-    console.log(subject, level);
+    // console.log(subject, level);
     ques();
   });
   const [analysis, setAnalysis] = useState(false);
@@ -73,7 +74,7 @@ const Quiztemp = ({ level, subject }) => {
   };
 
   const currentQuestion = questions[currentQuestionIndex];
-  console.log(currentQuestion?.answers, "c");
+  // console.log(currentQuestion?.answers, "c");
   if (analysis === true) {
     return (
       <Analysis

@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
+import { server } from "../utils/credentials";
 
 export default function LoginVerification({ navigation }) {
   const [navigatePage, setNavigate] = useState("");
@@ -12,7 +13,7 @@ export default function LoginVerification({ navigation }) {
       setNavigate("Landing");
     }
     if (email && password) {
-      fetch("http://192.168.1.36:3000/in/login", {
+      await fetch(`${server + "login"} `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

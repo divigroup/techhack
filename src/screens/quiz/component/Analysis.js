@@ -4,12 +4,15 @@ import {
   Text,
   ImageBackground,
   Dimensions,
+  Image,
 } from "react-native";
 
 import React, { useEffect, useState } from "react";
 import gif from "../../../../assets/6ob.gif";
 import AsyncStorage from "@react-native-community/async-storage";
 import { sub } from "react-native-reanimated";
+import { server } from "../../../utils/credentials";
+
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
 export default function Analysis({ subject, Score, Totalquestion, level }) {
@@ -22,8 +25,11 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
   const Boiler = async () => {
     const batch = await AsyncStorage.getItem("batch");
     const email = await AsyncStorage.getItem("email");
+    let batchArray = [];
+    if (batch) {
+      batchArray = batch.split(",");
+    }
 
-    let batchArray = batch.split(",");
     let update = true;
     for (let i = 0; i < batchArray.length; i++) {
       if (batchArray[i] == sublevel) {
@@ -31,7 +37,12 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
       }
     }
     if (update && percentage >= 60) {
-      AsyncStorage.setItem("batch", batch + "," + sublevel);
+      if (batch) {
+        AsyncStorage.setItem("batch", batch + "," + sublevel);
+      } else {
+        AsyncStorage.setItem("batch", sublevel);
+      }
+
       batchArray.push(sublevel);
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -47,8 +58,8 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
         body: raw,
         redirect: "follow",
       };
-
-      fetch("http://192.168.1.36:3000/in/updatebatch", requestOptions)
+      // let link = server + "updatebatch";
+      fetch(`${server + "updatebatch"} `, requestOptions)
         .then((response) => response.text())
         .then((result) => setUpdatesuccess(result.result === "updated"))
         .catch((error) => console.log("error", error));
@@ -71,15 +82,30 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
     );
   } else {
     // AsyncStorage.setItem("batch", String());
+    let image =
+      "https://techhackbadgesbucket.s3.ap-south-1.amazonaws.com/badges/" +
+      subject +
+      level +
+      ".png";
 
     return (
       <View style={styles.container}>
         <ImageBackground source={gif} resizeMode="stretch" style={styles.img}>
-          <Text>Congratulation On finishing the quiz</Text>
-          <Text>Score :{Score}</Text>
+          <Text
+            style={{ fontSize: 40, fontWeight: "600", fontStyle: "italic" }}
+          >
+            Congratulation{" "}
+          </Text>
+          <Text>You earned a new Badge</Text>
+
+          {/* <Text>Score :{Score}</Text>
           <Text>Totalquestion: {Totalquestion}</Text>
           <Text>Level:{level}</Text>
-          <Text>subject :{subject}</Text>
+          <Text>subject :{subject}</Text> */}
+          <Image
+            source={{ uri: image }}
+            style={{ height: 150, width: 150 }}
+          ></Image>
         </ImageBackground>
       </View>
     );
