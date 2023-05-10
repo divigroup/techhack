@@ -37,7 +37,7 @@ export default function Message({ navigation }) {
         }}
       >
         
-        <View style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "#b24bf3", height: 50, marginBottom: 10 }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", backgroundColor: "purple", height: 50, marginBottom: 10 }}>
           <TouchableOpacity
             style={{
               width: "12%",

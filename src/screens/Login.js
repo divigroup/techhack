@@ -12,21 +12,18 @@ import {
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
-// import { imag } from "../../assets/favicon.png";
 export default function Login({ navigation }) {
   const Boiler = async () => {
     const email = await AsyncStorage.getItem("email");
 
     if (email) {
       navigation.replace("Message");
-    } else {
-      navigation.navigate("Login");
     }
   };
 
   useEffect(() => {
     Boiler();
-  }, [errorflag]);
+  });
   const onSubmitHandler = async (props) => {
     if (email.length === 0 || password.length === 0) {
       setError("All field are mandatory");
@@ -55,6 +52,7 @@ export default function Login({ navigation }) {
               setErrorflag(true);
             }
           } else {
+            AsyncStorage.setItem("password", password);
             AsyncStorage.setItem("email", String(data["result"]["email"]));
             AsyncStorage.setItem("batch", String(data["result"]["batch"]));
             AsyncStorage.setItem(
@@ -65,6 +63,14 @@ export default function Login({ navigation }) {
               "lastname",
               String(data["result"]["lastName"])
             );
+            const Boiler = async () => {
+              const email = await AsyncStorage.getItem("email");
+
+              if (email) {
+                navigation.replace("Message");
+              }
+            };
+            Boiler();
           }
         });
     }
@@ -112,14 +118,14 @@ export default function Login({ navigation }) {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setError(""), onSubmitHandler(), Boiler();
+              setError(""), onSubmitHandler();
             }}
           >
             <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
           <Text
             style={{ color: "#000000", marginBottom: 5 }}
-            // onPress={() => navigation.navigate("")}
+            onPress={() => navigation.navigate("ForgotPassword")}
           >
             Forgot Password?
           </Text>

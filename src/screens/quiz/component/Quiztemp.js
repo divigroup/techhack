@@ -46,7 +46,7 @@ const Quiztemp = ({ level, subject, questions }) => {
 
     return () => clearTimeout(timer);
   }, [timeLeft]);
-  const progress = timeLeft / 5;
+  const progress = timeLeft / 15;
   const circumference = 2 * Math.PI * 25;
   const strokeDashoffset = circumference * (1 - progress);
 
@@ -60,7 +60,7 @@ const Quiztemp = ({ level, subject, questions }) => {
       setAnalysis(true);
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setTimeLeft(5);
+      setTimeLeft(15);
     }
   };
 
@@ -78,11 +78,12 @@ const Quiztemp = ({ level, subject, questions }) => {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Text>
-            level:{level}
+          <Text style={{fontWeight:"bold",fontSize:20}}>
+            Level: {level}
             {"  "}
-            {subject}
-          </Text>
+            </Text>
+            <Text style={{fontWeight:"bold",fontSize:30}}>{subject}</Text>
+          
           <View style={{ justifyContent: "center", alignSelf: "center" }}>
             <Svg width="50" height="50">
               <SvgText
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
   },
   timerText: {
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: "bold",
   },
   questionContainer: {
@@ -153,6 +154,7 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: "stretch",
     width: windowWidth * 0.9,
+    marginTop: -50
     // justifyContent: "center",
   },
   answerOptionButton: {

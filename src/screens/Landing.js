@@ -8,7 +8,7 @@ export default function Landing({navigation}) {
         <View>
   
      <Image
-            source={require("../../assets/landingimage.jpg")}
+            source={require("../../assets/image1.jpg")}
             style={styles.image}
           ></Image>
     <TouchableOpacity
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
-    backgroundColor:"#d9e8ff",
+    backgroundColor:"#e1a9ce",
   },
 
   image: {
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: "60%",
     marginLeft: 88,
     marginTop: 20,
-    backgroundColor: "#1167b1",
+    backgroundColor: "purple",
     borderRadius: 20,
     marginBottom: 10,
   }

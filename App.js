@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Landing from "./src/screens/Landing"
 import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
+import ForgotPassword from "./src/screens/ForgotPassword"
 import Message from "./src/screens/Message";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -31,6 +32,7 @@ function App({ navigation }) {
         <Stack.Screen name="java" component={Java} />
         <Stack.Screen name="analysis" component={Analysis} />
         <Stack.Screen name="profile" component={Profile} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );
