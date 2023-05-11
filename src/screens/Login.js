@@ -8,12 +8,15 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
+  Alert,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
 import { server } from "../utils/credentials";
 export default function Login({ navigation }) {
+  const [clicked, setclicked] = useState(false);
   const Boiler = async () => {
     const email = await AsyncStorage.getItem("email");
 
@@ -29,6 +32,7 @@ export default function Login({ navigation }) {
     if (email.length === 0 || password.length === 0) {
       setError("All field are mandatory");
       setErrorflag(true);
+      setclicked(false);
     } else {
       console.log("entered");
       fetch(`${server + "login"} `, {
@@ -47,10 +51,12 @@ export default function Login({ navigation }) {
             if (!data.emailError) {
               setError(data.passwordError);
               setErrorflag(true);
+              setclicked(false);
             }
             if (!data.passwordError) {
               setError(data.emailError);
               setErrorflag(true);
+              setclicked(false);
             }
           } else {
             AsyncStorage.setItem("password", password);
@@ -81,6 +87,7 @@ export default function Login({ navigation }) {
   const [errorflag, setErrorflag] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
@@ -116,11 +123,13 @@ export default function Login({ navigation }) {
             placeholder="Password"
             onChangeText={setPassword}
           ></TextInput>
+          {clicked ? <ActivityIndicator size="large" /> : <></>}
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              setError(""), onSubmitHandler();
+              setclicked(true), setError(""), onSubmitHandler();
             }}
+            disabled={clicked}
           >
             <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
