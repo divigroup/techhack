@@ -116,10 +116,14 @@ const Java = ({ route, navigation }) => {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={{fontWeight:"bold",fontSize:50,marginBottom:30}}>Javascript</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 50, marginBottom: 30 }}>
+            Java
+          </Text>
         </View>
         <View>
-          <Text style={{fontWeight:"bold",fontSize:30,marginBottom:25}}>LEVELS</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30, marginBottom: 25 }}>
+            LEVELS
+          </Text>
         </View>
         <TouchableOpacity
           style={styles.Button}
@@ -127,29 +131,28 @@ const Java = ({ route, navigation }) => {
             setLevel("easy");
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Easy</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Easy</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.Button}
+          style={lastLevel >= 0 ? styles.Button : styles.disabledbutton}
           onPress={() => {
             if (lastLevel >= 0) {
               setLevel("medium");
             }
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Medium</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Medium</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.Button}
+          style={lastLevel >= 1 ? styles.Button : styles.disabledbutton}
           onPress={() => {
             if (lastLevel >= 1) {
               setLevel("hard");
             }
           }}
         >
-          <Text style={{fontWeight:"bold",fontSize:30}}>Hard</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Hard</Text>
         </TouchableOpacity>
-        
       </View>
     );
   } else {
@@ -182,6 +185,17 @@ const styles = StyleSheet.create({
 
     alignItems: "center",
     backgroundColor: "#b24bf3",
+    padding: 10,
+    width: windowWidth * 0.9,
+    marginBottom: 4,
+    borderRadius: 10,
+    height: windowHeight * 0.15,
+  },
+  disabledbutton: {
+    justifyContent: "center",
+
+    alignItems: "center",
+    backgroundColor: "gray",
     padding: 10,
     width: windowWidth * 0.9,
     marginBottom: 4,

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  ImageBackground,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -138,7 +139,7 @@ const Python = ({ navigation }) => {
           <Text style={{ fontWeight: "bold", fontSize: 30 }}>Easy</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.Button}
+          style={lastLevel >= 0 ? styles.Button : styles.disabledbutton}
           onPress={() => {
             if (lastLevel >= 0) {
               setLevel("medium");
@@ -148,7 +149,7 @@ const Python = ({ navigation }) => {
           <Text style={{ fontWeight: "bold", fontSize: 30 }}>Medium</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={styles.Button}
+          style={lastLevel >= 1 ? styles.Button : styles.disabledbutton}
           onPress={() => {
             if (lastLevel >= 1) {
               setLevel("hard");
@@ -189,6 +190,17 @@ const styles = StyleSheet.create({
 
     alignItems: "center",
     backgroundColor: "#b24bf3",
+    padding: 10,
+    width: windowWidth * 0.9,
+    marginBottom: 4,
+    borderRadius: 10,
+    height: windowHeight * 0.15,
+  },
+  disabledbutton: {
+    justifyContent: "center",
+
+    alignItems: "center",
+    backgroundColor: "gray",
     padding: 10,
     width: windowWidth * 0.9,
     marginBottom: 4,
