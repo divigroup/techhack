@@ -12,7 +12,7 @@ import React from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useEffect, useState } from "react";
 export default function LeftheaderItems({ navigation }) {
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [click, setClick] = useState(0);
   const LogOut = async () => {
     try {
@@ -25,18 +25,18 @@ export default function LeftheaderItems({ navigation }) {
     }
   };
   const Boiler = async () => {
-    const email = await AsyncStorage.getItem("email");
+    const name = await AsyncStorage.getItem("firstname");
 
-    if (!email) {
-      navigation.replace("Login");
+    if (!name) {
+      navigation.replace("verification");
     } else {
-      setEmail(email);
+      setName(name);
     }
   };
 
   useEffect(() => {
     Boiler();
-  }, [email, click]);
+  });
   return (
     <SafeAreaView
       style={{
@@ -47,7 +47,7 @@ export default function LeftheaderItems({ navigation }) {
     >
       <View>
         <View style={{ alignItems: "center", padding: 10 }}>
-          <Image
+          {/* <Image
             source={require("../../assets/profile.jpg")}
             style={{
               borderRadius: 90,
@@ -56,13 +56,12 @@ export default function LeftheaderItems({ navigation }) {
               height: 120,
               maxWidth: 120,
             }}
-          ></Image>
-          <Text style={{ fontWeight: "bold" }}>{email}</Text>
+          ></Image> */}
+          <Text style={{ fontWeight: "bold",fontSize:40,marginTop:40}}>Hello, {name}!</Text>
         </View>
         <View
           style={{
             width: "100%",
-            height: 50,
 
             justifyContent: "center",
           }}
@@ -72,15 +71,15 @@ export default function LeftheaderItems({ navigation }) {
               navigation.navigate("profile");
             }}
           >
-            <Text style={{ fontSize: 25, fontWeight: "bold" }}>Profile</Text>
+            <Text style={{ fontSize: 25, fontWeight: "bold",marginLeft: 90,marginTop:40}}>Profile</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               LogOut(), setClick(1);
             }}
           >
-            <Text style={{ fontSize: 32, fontWeight: "bold",paddingLeft:90}}>
-              Logout-{String(">")}
+            <Text style={{ fontSize: 25, fontWeight: "bold",paddingLeft:90,marginTop:20}}>
+              Logout
             </Text>
           </TouchableOpacity>
         </View>

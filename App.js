@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useState, useEffect } from "react";
-import Landing from "./src/screens/Landing"
+import Landing from "./src/screens/Landing";
 import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
 import ForgotPassword from "./src/screens/ForgotPassword"
@@ -17,12 +17,17 @@ import C from "./src/screens/quiz/C";
 import Java from "./src/screens/quiz/Java";
 import Analysis from "./src/screens/quiz/component/Analysis";
 import Profile from "./src/screens/Profile";
+import LoginVerification from "./src/component/LoginVerification";
+import ForgetPassword from "./src/screens/ForgetPassword";
+import PasswordReset from "./src/component/PasswordReset";
+import Afterotp from "./src/component/Afterotp";
 const Stack = createNativeStackNavigator();
 
 function App({ navigation }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerTitle: "", headerShown: false}}>
+      <Stack.Navigator screenOptions={{ headerTitle: "", headerShown: false }}>
+        <Stack.Screen name="verification" component={LoginVerification} />
         <Stack.Screen name="Landing" component={Landing} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
@@ -32,7 +37,9 @@ function App({ navigation }) {
         <Stack.Screen name="java" component={Java} />
         <Stack.Screen name="analysis" component={Analysis} />
         <Stack.Screen name="profile" component={Profile} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="forgotpassword" component={ForgetPassword} />
+        <Stack.Screen name="passwordreset" component={PasswordReset} />
+        <Stack.Screen name="afterotp" component={Afterotp} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -6,29 +6,38 @@ import {
   TouchableOpacity,
   Dimensions,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import Question from "./Question";
 import Answer from "./Answer";
 import { Svg, Circle, Text as SvgText } from "react-native-svg";
 
 import Analysis from "./Analysis";
+import { server } from "../../../utils/credentials";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
-const questions = [
-  {
-    question: "What is the capital of France?",
-    answers: ["Paris", "London", "Madrid", "Berlin"],
-    correctAnswer: "Paris",
-  },
-  {
-    question: "What is the largest planet in our solar system?",
-    answers: ["Jupiter", "Saturn", "Mars", "Venus"],
-    correctAnswer: "Jupiter",
-  },
-];
 
-const Quiztemp = ({ level, subject, questions }) => {
+const Quiztemp = ({ level, subject }) => {
+  const [questions, setQuestion] = useState([{}]);
+  const ques = async () => {
+    await fetch(`${server + "question"} `, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        subject: subject,
+        level: level,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setQuestion(data.data));
+  };
+  useEffect(() => {
+    // console.log(subject, level);
+    ques();
+  });
   const [analysis, setAnalysis] = useState(false);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -65,6 +74,7 @@ const Quiztemp = ({ level, subject, questions }) => {
   };
 
   const currentQuestion = questions[currentQuestionIndex];
+  // console.log(currentQuestion?.answers, "c");
   if (analysis === true) {
     return (
       <Analysis
@@ -109,13 +119,11 @@ const Quiztemp = ({ level, subject, questions }) => {
               />
             </Svg>
           </View>
-          <View style={styles.questionContainer}>
-            <Text style={styles.questionText}>
-              <Question question={currentQuestion.question} />
-            </Text>
-          </View>
+
+          <Question question={currentQuestion.question} />
+
           <View style={styles.answerOptionsContainer}>
-            {currentQuestion.answers.map((answer) => (
+            {currentQuestion.answers?.map((answer) => (
               <Answer
                 key={answer}
                 answer={answer}
@@ -149,6 +157,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    padding: 10,
   },
   answerOptionsContainer: {
     flex: 2,

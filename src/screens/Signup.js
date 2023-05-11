@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { TextInput } from "react-native-gesture-handler";
+import { server } from "../utils/credentials";
 
 const API_URL =
   Platform.OS === "ios" ? "http://localhost:3000" : "http://10.0.2.2:3000";
@@ -37,7 +38,7 @@ export default function Signup({ navigation }) {
         email,
         password,
       };
-      fetch("http://192.168.1.36:3000/in/signup", {
+      fetch(`${server + "signup"} `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,13 +111,16 @@ export default function Signup({ navigation }) {
           </Dialog>
           <Text
             style={{
-              color: "#d3d3d3",
-              fontSize: 80,
+              color: "black",
+              fontSize: 40,
               fontWeight: "bold",
               marginBottom: 80,
             }}
           >
-            Sign Up
+            TechHack
+          </Text>
+          <Text style={{fontSize: 30,fontWeight:"bold",marginBottom:20}}>
+            Sign up
           </Text>
 
           {/* <Image
@@ -155,7 +159,7 @@ export default function Signup({ navigation }) {
             />
             {showPassword ? (
               <Image
-                style={{ width: "10%", height: "50%", marginLeft: 20 }}
+                style={{ width: "8%", height: "50%", marginLeft: 20 }}
                 source={require("../../assets/view.png")}
                 onPress={() => {
                   setShowPassword(false);
@@ -163,7 +167,7 @@ export default function Signup({ navigation }) {
               ></Image>
             ) : (
               <Image
-                style={{ width: "10%", height: "50%", marginLeft: 20 }}
+                style={{ width: "8%", height: "40%", marginLeft: 20 }}
                 source={require("../../assets/hide.png")}
                 onPress={() => {
                   setShowPassword(true);
@@ -183,9 +187,9 @@ export default function Signup({ navigation }) {
             </Text>
           </TouchableOpacity>
           <Text>
-            Have a account?{" "}
+            Have an account?{" "}
             <Text
-              style={{ color: "blue" }}
+              style={{ color: "purple",fontWeight:"bold"}}
               onPress={() => navigation.navigate("Login")}
             >
               Login
@@ -216,28 +220,23 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 5,
     marginVertical: 2,
-    borderColor: "black",
-    alignItems: "center",
-
-    borderRadius: 10,
-    marginVertical: 2,
     marginLeft: 2,
     width: "80%",
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#d3d3d3",
     marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
     borderRadius: 20,
-    width: "90%",
-    height: "14%",
-    borderRadius: 20,
+    width: "91%",
+    height: "12%",
+    borderRadius: 15,
   },
 
   password: {
     padding: 10,
     marginVertical: 2,
-    marginLeft: 2,
+    marginLeft: 1,
     width: "80%",
   },
   image: {
@@ -250,12 +249,14 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     marginLeft: -4,
     width: "90%",
+    height: "12%",
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#d3d3d3",
+    marginTop:10,
     marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 15,
   },
   smallinput: {
     padding: 10,
@@ -263,19 +264,21 @@ const styles = StyleSheet.create({
     marginLeft: -4,
     marginRight: 5,
     width: "50%",
+    height: "82%",
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#d3d3d3",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 20,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 15,
   },
   button: {
     padding: 13,
     paddingHorizontal: 30,
     marginTop: 10,
-    backgroundColor: "#1167b1",
-    borderRadius: 20,
+    width: "50%",
+    backgroundColor: "purple",
+    borderRadius: 15,
     marginBottom: 10,
   },
 });

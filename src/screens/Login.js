@@ -12,6 +12,7 @@ import {
 import { useState, useEffect } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-community/async-storage";
+import { server } from "../utils/credentials";
 export default function Login({ navigation }) {
   const Boiler = async () => {
     const email = await AsyncStorage.getItem("email");
@@ -30,7 +31,7 @@ export default function Login({ navigation }) {
       setErrorflag(true);
     } else {
       console.log("entered");
-      fetch("http://192.168.1.36:3000/in/login", {
+      fetch(`${server + "login"} `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -92,13 +93,16 @@ export default function Login({ navigation }) {
         >
           <Text
             style={{
-              color: "#d3d3d3",
-              fontSize: 80,
+              color: "black",
+              fontSize: 40,
               fontWeight: "bold",
               marginBottom: 80,
             }}
           >
-            Sign In
+            TechHack
+          </Text>
+          <Text style={{fontSize: 30,fontWeight:"bold",marginBottom:20}}>
+            Sign in
           </Text>
           {/* <Image
             source={require("../../assets/favicon.png")}
@@ -107,7 +111,7 @@ export default function Login({ navigation }) {
           {errorflag ? <Text style={{ color: "red" }}>{error}</Text> : <></>}
           <TextInput
             style={styles.input}
-            placeholder="Email/Phone"
+            placeholder="Email"
             onChangeText={setEmail}
           ></TextInput>
           <TextInput
@@ -124,15 +128,15 @@ export default function Login({ navigation }) {
             <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
           <Text
-            style={{ color: "#000000", marginBottom: 5 }}
-            onPress={() => navigation.navigate("ForgotPassword")}
+            style={{ color: "#000000", marginBottom: 4}}
+            onPress={() => navigation.navigate("forgotpassword")}
           >
             Forgot Password?
           </Text>
-          <Text>
+          <Text style={{fontSize:15}}>
             Don't have a account?{" "}
             <Text
-              style={{ color: "#1167b1" }}
+              style={{ color: "purple",fontWeight:"bold"}}
               onPress={() => navigation.navigate("Signup")}
             >
               Signup
@@ -154,26 +158,28 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginHorizontal: 20,
   },
+  
   text: {
     fontSize: 42,
   },
-  image: {
-    width: 110,
-    height: 110,
-    marginBottom: 100,
-  },
+  // image: {
+  //   width: 110,
+  //   height: 110,
+  //   marginBottom: 100,
+  // },
   input: {
     color: "#000000",
     padding: 10,
     marginVertical: 2,
     width: "90%",
+    height: "13%",
     marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 10,
     borderWidth: 2,
     alignItems: "stretch",
-    borderColor: "#000000",
+    borderColor: "#d3d3d3",
   },
   button: {
     padding: 13,
@@ -181,8 +187,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "50%",
     color: "white",
-    backgroundColor: "#1167b1",
-    borderRadius: 40,
+    backgroundColor: "purple",
+    borderRadius: 15,
     marginBottom: 10,
   },
 });
