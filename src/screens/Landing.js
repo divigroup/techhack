@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     marginLeft: 88,
     marginTop: 20,
     backgroundColor: "purple",
-    borderRadius: 20,
+    borderRadius: 15,
     marginBottom: 10,
   },
 });

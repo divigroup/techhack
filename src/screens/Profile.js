@@ -68,10 +68,12 @@ export default function Profile({ navigation }) {
             <Image
               source={backimage}
               style={{
-                height: StatusBar.currentHeight + 10,
+                height: StatusBar.currentHeight + 5,
                 width: StatusBar.currentHeight * 2,
-                maxWidth: 41,
-                maxHeight: 40,
+                maxWidth: 30,
+                maxHeight: 30,
+                marginTop:10,
+                marginLeft:5
               }}
             ></Image>
           </TouchableOpacity>
@@ -79,7 +81,7 @@ export default function Profile({ navigation }) {
         <View style={styles.container}>
           <View style={styles.editableFieldsContainer}>
             <View style={styles.fieldContainer}>
-              <Text style={styles.label}>Name:</Text>
+              <Text style={styles.label}>Name</Text>
               <TextInput
                 style={styles.input}
                 value={name}
@@ -87,7 +89,7 @@ export default function Profile({ navigation }) {
               />
             </View>
             <View style={styles.fieldContainer}>
-              <Text style={styles.label}>Email:</Text>
+              <Text style={styles.label}>Email</Text>
               <TextInput
                 style={styles.input}
                 value={email}
@@ -101,10 +103,10 @@ export default function Profile({ navigation }) {
 
                   alignItems: "center",
                   borderWidth: 2,
-                  borderColor: "black",
+                  borderColor: "#d3d3d3",
                 }}
               >
-                <Text style={{ fontWeight: "bold", fontSize: 20 }}>Badges</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 40,marginBottom:20 }}>Badges</Text>
                 <View
                   style={{
                     flexDirection: "row",
@@ -121,7 +123,7 @@ export default function Profile({ navigation }) {
                         source={{
                           uri: image,
                         }}
-                        style={{ height: 100, width: 100 }}
+                        style={{ height: 150, width: 150 }}
                       />
                     </TouchableOpacity>
                   ))}
@@ -148,14 +150,14 @@ export default function Profile({ navigation }) {
                 </Modal>
               </View>
             </View>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.submitButton}
               onPress={() => {
                 updateDetails();
               }}
             >
               <Text>Submit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </ScrollView>
@@ -179,12 +181,13 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
   },
   badgesContainer: {
+    backgroundColor: "#fff",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 16,
+    marginBottom: 16
   },
   badge: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#d3d3d3",
     padding: 8,
     borderRadius: 8,
   },
@@ -192,6 +195,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   fieldContainer: {
+    backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 16,
@@ -203,22 +207,22 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#d3d3d3",
     borderRadius: 8,
     padding: 8,
     fontSize: 16,
   },
-  submitButton: {
-    padding: 20,
-    borderRadius: 10,
-    justifyContent: "center",
-    alignContent: "center",
-    shadowColor: "black",
-    shadowOpacity: 10,
-    flex: 1,
-    backgroundColor: "green",
-    width: "30%",
-    alignSelf: "center",
-    alignItems: "center",
-  },
+  // submitButton: {
+  //   padding: 20,
+  //   borderRadius: 10,
+  //   justifyContent: "center",
+  //   alignContent: "center",
+  //   shadowColor: "black",
+  //   shadowOpacity: 10,
+  //   flex: 1,
+  //   backgroundColor: "green",
+  //   width: "30%",
+  //   alignSelf: "center",
+  //   alignItems: "center",
+  // },
 });
