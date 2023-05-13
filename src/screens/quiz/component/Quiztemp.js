@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 20,
+    
     paddingVertical: 50,
   },
   timerText: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: "stretch",
     width: windowWidth * 0.9,
-    marginTop: -50
+   
     // justifyContent: "center",
   },
   answerOptionButton: {
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   questionText: {
-    fontSize: 28,
+    fontSize: 40,
     fontWeight: "bold",
     textAlign: "center",
   },

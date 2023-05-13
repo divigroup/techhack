@@ -57,7 +57,7 @@ export default function LeftheaderItems({ navigation }) {
               maxWidth: 120,
             }}
           ></Image> */}
-          <Text style={{ fontWeight: "bold",fontSize:40,marginTop:40}}>Hello, {name}!</Text>
+          <Text style={{ fontWeight: "800",fontSize:30,marginTop:40}}>TechHack</Text>
         </View>
         <View
           style={{

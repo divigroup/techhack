@@ -6,8 +6,11 @@ import {
   TouchableOpacity,
   Dimensions,
   ImageBackground,
+  Image,
+  StatusBar
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
+import backimage from "../../../assets/back.png";
 
 import Quiztemp from "./component/Quiztemp";
 const windowWidth = Dimensions.get("window").width;
@@ -120,6 +123,26 @@ const Python = ({ navigation }) => {
   if (level === "") {
     return (
       <View style={styles.container}>
+        <View style={{ }}>
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => {
+              navigation.navigate("Message");
+            }}
+          >
+            <Image
+              source={backimage}
+              style={{
+                height: StatusBar.currentHeight + 5,
+                // width: StatusBar.currentHeight * 2,
+                maxWidth: 30,
+                maxHeight: 30,
+                marginTop:-135,
+                marginLeft:-180
+              }}
+            ></Image>
+          </TouchableOpacity>
+        </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 50, marginBottom: 30 }}>
             Python
@@ -178,6 +201,14 @@ const Python = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  backButton: {
+    paddingTop: StatusBar.currentHeight,
+    // backgroundColor: "#fff",
+    paddingLeft: 6,
+
+    width: StatusBar.currentHeight * 2,
+    maxWidth: 41,
+  },
   container: {
     flex: 1,
     justifyContent: "center",
