@@ -317,8 +317,8 @@ const styles = StyleSheet.create({
   input: {
     padding: 10,
     marginVertical: 2,
-    marginLeft: -4,
-    width: "90%",
+    marginLeft: -2,
+    width: "91%",
     height: "12%",
     borderWidth: 2,
     borderColor: "#d3d3d3",

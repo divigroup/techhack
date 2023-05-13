@@ -5,7 +5,7 @@ const Question = ({ question }) => {
   return (
     <SafeAreaView style={styles.questionContainer}>
       <ScrollView>
-        <Text style={{ fontWeight: "bold" }}> {question}</Text>
+        <Text style={{ fontWeight: "bold",fontSize:25}}> {question}</Text>
       </ScrollView>
     </SafeAreaView>
   );
@@ -13,7 +13,7 @@ const Question = ({ question }) => {
 const styles = StyleSheet.create({
   questionContainer: {
     flex: 1,
-    width: "80%",
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
     padding: 10,

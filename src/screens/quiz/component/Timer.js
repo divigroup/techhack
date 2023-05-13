@@ -39,7 +39,7 @@ const Timer = ({ duration, onComplete }) => {
           r="22"
           fill="transparent"
           stroke="#ffbf00"
-          strokeWidth="3"
+          strokeWidth="5"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"

@@ -73,11 +73,11 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
   if (percentage < 60) {
     return (
       <View style={styles.container}>
-        <ImageBackground source={gif} resizeMode="stretch" style={styles.img}>
-          <Text>You Score is less than 60%</Text>
+        {/* <ImageBackground source={gif} resizeMode="stretch" style={styles.img}> */}
+          <Text style={{fontSize: 30,fontWeight:"bold"}}>You Score is less than 60%</Text>
 
-          <Text>Level:{level}</Text>
-        </ImageBackground>
+          <Text style={{fontSize: 30,fontWeight:"bold"}}>Level: {level}</Text>
+        {/* </ImageBackground> */}
       </View>
     );
   } else {
@@ -92,11 +92,11 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
       <View style={styles.container}>
         <ImageBackground source={gif} resizeMode="stretch" style={styles.img}>
           <Text
-            style={{ fontSize: 40, fontWeight: "600", fontStyle: "italic" }}
+            style={{ fontSize: 40, fontWeight: "800",marginBottom:40}}
           >
-            Congratulation{" "}
+            Congratulations!{" "}
           </Text>
-          <Text>You earned a new Badge</Text>
+          <Text style={{fontSize: 30,fontWeight:"bold"}}>You earned a new Badge</Text>
 
           {/* <Text>Score :{Score}</Text>
           <Text>Totalquestion: {Totalquestion}</Text>
