@@ -94,7 +94,7 @@ export default function Login({ navigation }) {
         <View
           style={{
             alignItems: "center",
-            paddingVertical: 10,
+            paddingVertical: 30,
             gap: 1,
           }}
         >
@@ -108,7 +108,7 @@ export default function Login({ navigation }) {
           >
             TechHack
           </Text>
-          <Text style={{fontSize: 30,fontWeight:"bold",marginBottom:20}}>
+          <Text style={{ fontSize: 30, fontWeight: "bold", marginBottom: 20 }}>
             Sign in
           </Text>
           {/* <Image
@@ -137,15 +137,15 @@ export default function Login({ navigation }) {
             <Text style={{ color: "white", textAlign: "center" }}>Sign In</Text>
           </TouchableOpacity>
           <Text
-            style={{ color: "#000000", marginBottom: 4}}
+            style={{ color: "#000000", marginBottom: 4 }}
             onPress={() => navigation.navigate("forgotpassword")}
           >
             Forgot Password?
           </Text>
-          <Text style={{fontSize:15}}>
+          <Text style={{ fontSize: 15 }}>
             Don't have a account?{" "}
             <Text
-              style={{ color: "purple",fontWeight:"bold"}}
+              style={{ color: "purple", fontWeight: "bold" }}
               onPress={() => navigation.navigate("Signup")}
             >
               Signup
@@ -166,8 +166,9 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: "white",
     marginHorizontal: 20,
+    height: "100%",
   },
-  
+
   text: {
     fontSize: 42,
   },

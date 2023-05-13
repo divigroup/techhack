@@ -8,19 +8,26 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
+  Modal,
+  Dimensions,
+  Alert,
 } from "react-native";
 import { useState } from "react";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
 import { TextInput } from "react-native-gesture-handler";
 import { server } from "../utils/credentials";
+import { authorizationToken } from "../utils/credentials";
+import { CourierClient } from "@trycourier/courier";
 
-const API_URL =
-  Platform.OS === "ios" ? "http://localhost:3000" : "http://10.0.2.2:3000";
-
-// import { imag } from "../../assets/favicon.png";
 export default function Signup({ navigation }) {
+  const courier = CourierClient({
+    authorizationToken: authorizationToken,
+  });
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [allfielderror, setAllfielderror] = useState(false);
-  const onSubmitHandler = () => {
+  const [receivedotp, setReceivedotp] = useState("");
+  const [sentotp, setsentotp] = useState("");
+  const onSubmitHandler = async () => {
     if (
       firstName.length === 0 ||
       lastName.length === 0 ||
@@ -31,7 +38,37 @@ export default function Signup({ navigation }) {
       setAllfielderror(true);
     } else {
       setAllfielderror(false);
-
+      let otpVal = Math.floor(1000 + Math.random() * 9000);
+      setsentotp(String(otpVal));
+      const { requestId } = await courier.send({
+        message: {
+          content: {
+            title: "Welcome to TechHack!",
+            body: "Your otp for Account setup? {{otp}}",
+          },
+          data: {
+            otp: otpVal,
+          },
+          to: {
+            email: email,
+          },
+        },
+      });
+      if (requestId) {
+        setIsModalVisible(true);
+      } else {
+        // setErrorflag(true);
+        setAllfielderror(true);
+        setError("Try again");
+      }
+    }
+  };
+  const handleOtpSubmit = () => {
+    // Do something with the password, e.g. validate it
+    // console.log("Submitting password:", password);
+    // Hide the modal
+    console.log();
+    if (sentotp == receivedotp) {
       const payload = {
         firstName,
         lastName,
@@ -59,7 +96,6 @@ export default function Signup({ navigation }) {
             } else {
               setError("Sorry, Server Error Try Again in a while");
             }
-
             setAllfielderror(true);
           }
         })
@@ -67,9 +103,16 @@ export default function Signup({ navigation }) {
           setError("Sorry, Server Error Try Again in a while");
           setAllfielderror(true);
         });
+      setIsModalVisible(false);
+    } else {
+      Alert.alert("Try again");
     }
   };
-
+  const handleChangeText = (text) => {
+    // Ensure the password only contains 4 digits
+    setReceivedotp(String(text));
+    console.log(text);
+  };
   const [showPassword, setShowPassword] = useState(true);
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
@@ -87,6 +130,38 @@ export default function Signup({ navigation }) {
             gap: 1,
           }}
         >
+          <Modal visible={isModalVisible} animationType="slide">
+            <View style={styles.modalContent}>
+              <Text style={styles.modalLabel}>Enter 4-digit Otp:</Text>
+              {/* <View style={styles.inputContainer}> */}
+              <TextInput
+                style={styles.inputotp}
+                keyboardType="numeric"
+                maxLength={4}
+                // secureTextEntry={true}
+                onChangeText={(text) => handleChangeText(text)}
+              />
+              {/* </View> */}
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={() => setIsModalVisible(false)}
+                  style={styles.modelbutton}
+                >
+                  <Text style={{ color: "white", fontWeight: "bold" }}>
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => handleOtpSubmit()}
+                  style={styles.modelbutton}
+                >
+                  <Text style={{ color: "white", fontWeight: "bold" }}>
+                    Submit
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
           <Dialog
             visible={dialog}
             onTouchOutside={() => {
@@ -119,14 +194,9 @@ export default function Signup({ navigation }) {
           >
             TechHack
           </Text>
-          <Text style={{fontSize: 30,fontWeight:"bold",marginBottom:20}}>
+          <Text style={{ fontSize: 30, fontWeight: "bold", marginBottom: 20 }}>
             Sign up
           </Text>
-
-          {/* <Image
-            source={require("../../assets/favicon.png")}
-            style={styles.image}
-          ></Image> */}
 
           {allfielderror ? (
             <Text style={{ color: "red" }}>{error}</Text>
@@ -175,7 +245,6 @@ export default function Signup({ navigation }) {
               />
             )}
           </View>
-
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -189,7 +258,7 @@ export default function Signup({ navigation }) {
           <Text>
             Have an account?{" "}
             <Text
-              style={{ color: "purple",fontWeight:"bold"}}
+              style={{ color: "purple", fontWeight: "bold" }}
               onPress={() => navigation.navigate("Login")}
             >
               Login
@@ -206,6 +275,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
     backgroundColor: "white",
+    height: Dimensions.get("screen").height,
   },
   scrollView: {
     backgroundColor: "white",
@@ -252,7 +322,7 @@ const styles = StyleSheet.create({
     height: "12%",
     borderWidth: 2,
     borderColor: "#d3d3d3",
-    marginTop:10,
+    marginTop: 10,
     marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",
@@ -280,5 +350,46 @@ const styles = StyleSheet.create({
     backgroundColor: "purple",
     borderRadius: 15,
     marginBottom: 10,
+  },
+  modelbutton: {
+    padding: 13,
+    paddingHorizontal: 30,
+    marginTop: 10,
+
+    backgroundColor: "purple",
+    borderRadius: 15,
+    marginBottom: 10,
+  },
+
+  modalContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+  modalLabel: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    width: "90%",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    marginTop: 20,
+    gap: 20,
+  },
+  inputotp: {
+    width: "80%",
+    height: 50,
+    marginHorizontal: 10,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "gray",
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
