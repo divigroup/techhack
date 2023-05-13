@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
-  StatusBar
+  StatusBar,
+  SafeAreaView
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import backimage from "../../../assets/back.png";
@@ -117,34 +118,20 @@ const Java = ({ route, navigation }) => {
   const [level, setLevel] = useState("");
   if (level === "") {
     return (
-      <View style={styles.container}>
-        <View style={{ }}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => {
+      <SafeAreaView style={styles.maincontainer}>
+        <View style={styles.navbar}>
+            <Text style={styles.backButton} onPress={() => {
               navigation.navigate("Message");
-            }}
-          >
-            <Image
-              source={backimage}
-              style={{
-                height: StatusBar.currentHeight + 5,
-                // width: StatusBar.currentHeight * 2,
-                maxWidth: 30,
-                maxHeight: 30,
-                marginTop:-135,
-                marginLeft:-180
-              }}
-            ></Image>
-          </TouchableOpacity>
-        </View>
+            }}>{'<'}</Text>
+
+          <Text style={styles.navbartext}>Java</Text>
+         
+          </View>
+        <View style={styles.container}>
+        
+       
         <View>
-          <Text style={{ fontWeight: "bold", fontSize: 50, marginBottom: 30 }}>
-            Java
-          </Text>
-        </View>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 30, marginBottom: 25 }}>
+          <Text style={{ fontWeight: "800", fontSize: 40, marginBottom: 25 }}>
             LEVELS
           </Text>
         </View>
@@ -154,7 +141,7 @@ const Java = ({ route, navigation }) => {
             setLevel("easy");
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Easy</Text>
+          <Text style={{ fontWeight: "400", fontSize: 30,color:"white" }}>Easy</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={lastLevel >= 0 ? styles.Button : styles.disabledbutton}
@@ -164,7 +151,7 @@ const Java = ({ route, navigation }) => {
             }
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Medium</Text>
+          <Text style={{ fontWeight: "400", fontSize: 30,color:"white" }}>Medium</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={lastLevel >= 1 ? styles.Button : styles.disabledbutton}
@@ -174,9 +161,11 @@ const Java = ({ route, navigation }) => {
             }
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 30 }}>Hard</Text>
+          <Text style={{ fontWeight: "400", fontSize: 30,color:"white" }}>Hard</Text>
         </TouchableOpacity>
       </View>
+      </SafeAreaView>
+      
     );
   } else {
     return (
@@ -196,13 +185,33 @@ const Java = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  maincontainer:{
+    flex:1,
+  
+  },
+  navbar:{
+    flexDirection:"row",
+    backgroundColor:"purple",
+    gap:120,
+    alignContent:"center"
+  },
+   navbartext:{
+        paddingTop: StatusBar.currentHeight,
+        fontSize: 25,
+        color:"white",
+        fontWeight:"bold",
+        marginLeft:10
+               
+  },
   backButton: {
     paddingTop: StatusBar.currentHeight,
-    // backgroundColor: "#fff",
-    paddingLeft: 6,
-
-    width: StatusBar.currentHeight * 2,
-    maxWidth: 41,
+        fontSize: 40,
+        color:"white",
+        marginLeft:15,
+        marginTop:-10,
+        opacity: 0.8,
+        fontWeight:150
+   
   },
   container: {
     flex: 1,
@@ -215,10 +224,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
 
     alignItems: "center",
-    backgroundColor: "#b24bf3",
+    backgroundColor: "purple",
     padding: 10,
     width: windowWidth * 0.9,
-    marginBottom: 4,
+    marginBottom: 20,
     borderRadius: 10,
     height: windowHeight * 0.15,
   },

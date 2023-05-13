@@ -89,14 +89,15 @@ export default function LeftheaderItems({ navigation }) {
         style={{
           width: "100%",
           height: 50,
-          backgroundColor: "#b24bf3",
+          backgroundColor: "purple",
+         
           justifyContent: "center",
           alignItems: "center",
           position: "absolute", //Here is the trick
           bottom: 0, //Here is the trick
         }}
       >
-        <Text>@2023</Text>
+        <Text style={{ color:"white",}}>@2023</Text>
       </View>
     </SafeAreaView>
   );

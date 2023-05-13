@@ -71,7 +71,7 @@ export default function Message({ navigation }) {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            backgroundColor: "#b24bf3",
+            backgroundColor: "purple",
             height: 50,
             marginBottom: 10,
           }}
