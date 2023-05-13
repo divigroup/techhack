@@ -19,8 +19,12 @@ const C = ({ route, navigation }) => {
   const [lastLevel, setLastlevel] = useState(-1);
   const Boiler = async () => {
     const batch = await AsyncStorage.getItem("batch");
+    let batchArray = [];
 
-    const batchArray = batch.split(",");
+    if (batch) {
+      console.log(batch);
+      batchArray = batch.split(",");
+    }
 
     for (let i = 0; i < batchArray.length; i++) {
       if (batchArray[i] === "cexpert") {

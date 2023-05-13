@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Landing from "./src/screens/Landing";
 import Signup from "./src/screens/Signup";
 import Login from "./src/screens/Login";
-import ForgotPassword from "./src/screens/ForgotPassword"
+import ForgotPassword from "./src/screens/ForgotPassword";
 import Message from "./src/screens/Message";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -21,6 +21,7 @@ import LoginVerification from "./src/component/LoginVerification";
 import ForgetPassword from "./src/screens/ForgetPassword";
 import PasswordReset from "./src/component/PasswordReset";
 import Afterotp from "./src/component/Afterotp";
+
 const Stack = createNativeStackNavigator();
 
 function App({ navigation }) {

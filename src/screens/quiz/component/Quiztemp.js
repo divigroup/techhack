@@ -20,6 +20,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const Quiztemp = ({ level, subject }) => {
   const [questions, setQuestion] = useState([{}]);
+  console.log(subject, level);
   const ques = async () => {
     await fetch(`${server + "question"} `, {
       method: "POST",
@@ -42,7 +43,7 @@ const Quiztemp = ({ level, subject }) => {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(15);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -88,12 +89,12 @@ const Quiztemp = ({ level, subject }) => {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={{fontWeight:"bold",fontSize:20}}>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
             Level: {level}
             {"  "}
-            </Text>
-            <Text style={{fontWeight:"bold",fontSize:30}}>{subject}</Text>
-          
+          </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 30 }}>{subject}</Text>
+
           <View style={{ justifyContent: "center", alignSelf: "center" }}>
             <Svg width="50" height="50">
               <SvgText
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignItems: "center",
     justifyContent: "center",
-    
+
     paddingVertical: 50,
   },
   timerText: {
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: "stretch",
     width: windowWidth * 0.9,
-   
+
     // justifyContent: "center",
   },
   answerOptionButton: {
