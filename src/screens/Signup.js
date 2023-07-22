@@ -11,6 +11,7 @@ import {
   Modal,
   Dimensions,
   Alert,
+  ActivityIndicator 
 } from "react-native";
 import { useState } from "react";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
@@ -18,6 +19,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { server } from "../utils/credentials";
 import { authorizationToken } from "../utils/credentials";
 import { CourierClient } from "@trycourier/courier";
+
+
 
 export default function Signup({ navigation }) {
   const courier = CourierClient({
@@ -27,6 +30,12 @@ export default function Signup({ navigation }) {
   const [allfielderror, setAllfielderror] = useState(false);
   const [receivedotp, setReceivedotp] = useState("");
   const [sentotp, setsentotp] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [loading,setloading]=useState(false)
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
   const onSubmitHandler = async () => {
     if (
       firstName.length === 0 ||
@@ -67,8 +76,10 @@ export default function Signup({ navigation }) {
     // Do something with the password, e.g. validate it
     // console.log("Submitting password:", password);
     // Hide the modal
-    console.log();
+   
+  
     if (sentotp == receivedotp) {
+      setloading(true)
       const payload = {
         firstName,
         lastName,
@@ -88,12 +99,15 @@ export default function Signup({ navigation }) {
             if (res.status !== 200) {
               console.log("repeat");
             } else {
+              setloading(false)
               setdialog(true);
             }
           } catch (err) {
             if (res.status === 422) {
+              setloading(false)
               setError("Email already registered");
             } else {
+              setloading(false)
               setError("Sorry, Server Error Try Again in a while");
             }
             setAllfielderror(true);
@@ -111,9 +125,9 @@ export default function Signup({ navigation }) {
   const handleChangeText = (text) => {
     // Ensure the password only contains 4 digits
     setReceivedotp(String(text));
-    console.log(text);
+ 
   };
-  const [showPassword, setShowPassword] = useState(true);
+
   const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
@@ -126,7 +140,8 @@ export default function Signup({ navigation }) {
         <View
           style={{
             alignItems: "center",
-            paddingVertical: 10,
+          
+            paddingBottom:30,
             gap: 1,
           }}
         >
@@ -163,12 +178,13 @@ export default function Signup({ navigation }) {
             </View>
           </Modal>
           <Dialog
-            visible={dialog}
+            visible={dialog }
             onTouchOutside={() => {
               setdialog(false);
             }}
           >
             <View style={{ padding: 10 }}>
+              {!loading?
               <DialogContent
                 style={{ width: "100%", padding: 4, alignItems: "center" }}
               >
@@ -176,11 +192,30 @@ export default function Signup({ navigation }) {
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => {
+                    
                     setdialog(false);
                   }}
                 >
                   <Text>Ok</Text>
                 </TouchableOpacity>
+              </DialogContent>:<DialogContent
+                style={{ width: "100%", padding: 4, alignItems: "center" }}
+              >
+                <Text style={{ fontSize: 30 }}>Registration in progress</Text>
+             <ActivityIndicator size="large" />
+              </DialogContent>}
+            </View>
+          </Dialog>
+          <Dialog
+            visible={loading}
+            
+          >
+            <View style={{ padding: 10 }}>
+             <DialogContent
+                style={{ width: "100%", padding: 4, alignItems: "center" }}
+              >
+                <Text style={{ fontSize: 30 }}>Registration in progress</Text>
+             <ActivityIndicator size="large" />
               </DialogContent>
             </View>
           </Dialog>
@@ -203,7 +238,7 @@ export default function Signup({ navigation }) {
           ) : (
             <></>
           )}
-          <View style={{ flexDirection: "row", width: "88%", columnGap: 4 }}>
+          <View style={{ flexDirection: "row", width: "90%", columnGap: 4 }}>
             <TextInput
               style={styles.smallinput}
               placeholder="First Name"
@@ -220,31 +255,23 @@ export default function Signup({ navigation }) {
             placeholder="Email"
             onChangeText={setEmail}
           />
-          <View style={styles.passworddiv}>
-            <TextInput
-              style={styles.password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              secureTextEntry={showPassword}
-            />
-            {showPassword ? (
-              <Image
-                style={{ width: "8%", height: "50%", marginLeft: 20 }}
-                source={require("../../assets/view.png")}
-                onPress={() => {
-                  setShowPassword(false);
-                }}
-              ></Image>
-            ) : (
-              <Image
-                style={{ width: "8%", height: "40%", marginLeft: 20 }}
-                source={require("../../assets/hide.png")}
-                onPress={() => {
-                  setShowPassword(true);
-                }}
-              />
-            )}
-          </View>
+        
+          <View style={styles.inputContainer}>
+      <TextInput
+        style={styles.textInput}
+        secureTextEntry={isPasswordVisible}
+        value={password}
+        onChangeText={setPassword}
+        placeholder="Enter your password"
+      />
+      <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
+        {!isPasswordVisible ? (
+          <Image source={require('../../assets/view.png')} style={{ width: 24, height: 24 }} />
+        ) : (
+          <Image source={require('../../assets/hide.png')} style={{ width: 24, height: 24 }} />
+        )}
+      </TouchableOpacity>
+    </View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -255,15 +282,17 @@ export default function Signup({ navigation }) {
               Register
             </Text>
           </TouchableOpacity>
-          <Text>
+          <View style={{zIndex:100}}>
+          <Text  style={{}}>
             Have an account?{" "}
             <Text
-              style={{ color: "purple", fontWeight: "bold" }}
+              style={{ color: "purple", fontWeight: "bold"}}
               onPress={() => navigation.navigate("Login")}
             >
               Login
             </Text>
           </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -275,40 +304,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight * 3,
     backgroundColor: "white",
-    height: Dimensions.get("screen").height,
+    height: "100%", 
   },
   scrollView: {
-    backgroundColor: "white",
     marginHorizontal: 20,
   },
   text: {
     fontSize: 42,
   },
-  passworddiv: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    backgroundColor: "white",
-    padding: 5,
-    marginVertical: 2,
-    marginLeft: 2,
-    width: "80%",
-    borderWidth: 2,
-    borderColor: "#d3d3d3",
-    marginBottom: 15,
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 20,
-    width: "91%",
-    height: "12%",
-    borderRadius: 15,
-  },
 
-  password: {
-    padding: 10,
-    marginVertical: 2,
-    marginLeft: 1,
-    width: "80%",
-  },
   image: {
     width: 110,
     height: 110,
@@ -391,5 +395,34 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 24,
     fontWeight: "bold",
+  },
+   inputContainer: {
+ padding: 10,
+    marginVertical: 2,
+    marginLeft: -2,
+    width: "91%",
+    height: "12%",
+    borderWidth: 2,
+    borderColor: "#d3d3d3",
+    marginTop: 10,
+    marginBottom: 15,
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 15,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+   
+   
+    padding: 10,
+   
+  },
+  textInput: {
+    flex: 1,
+    height: 40,
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 10,
   },
 });
