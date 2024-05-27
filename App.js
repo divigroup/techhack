@@ -8,7 +8,7 @@ import ForgotPassword from "./src/screens/ForgotPassword";
 import Message from "./src/screens/Message";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-community/async-storage";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, StatusBar } from "react-native";
 import Leftheader from "./src/screens/Leftheader";
 // import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import SideMenu from "react-native-side-menu-updated";
@@ -27,6 +27,7 @@ const Stack = createNativeStackNavigator();
 function App({ navigation }) {
   return (
     <NavigationContainer>
+      <StatusBar hidden={true} />
       <Stack.Navigator screenOptions={{ headerTitle: "", headerShown: false }}>
         <Stack.Screen name="verification" component={LoginVerification} />
         <Stack.Screen name="Landing" component={Landing} />

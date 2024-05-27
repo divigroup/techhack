@@ -77,7 +77,7 @@ const LandingScreen = ({ navigation }) => {
         </Text>
         <View style={{ paddingTop: 40 }}>
           <Image
-            source={require("../../assets/python.png")}
+            source={require("../../assets/c.png")}
             style={{
               width: 80,
               height: 80,
@@ -106,7 +106,7 @@ const LandingScreen = ({ navigation }) => {
         </Text>
         <View style={{ paddingTop: 40 }}>
           <Image
-            source={require("../../assets/python.png")}
+            source={require("../../assets/java.png")}
             style={{
               width: 80,
               height: 80,

@@ -8,7 +8,7 @@ import {
   ImageBackground,
   Image,
   StatusBar,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import backimage from "../../../assets/back.png";
@@ -99,7 +99,7 @@ const Python = ({ navigation }) => {
     let batchArray = [];
 
     if (batch) {
-      console.log(batch);
+      // console.log(batch);
       batchArray = batch.split(",");
     }
 
@@ -127,9 +127,8 @@ const Python = ({ navigation }) => {
         <View style={styles.navbar}>
           {/* <TouchableOpacity
             style={styles.backButton} */}
-           
-          
-            {/* <Image
+
+          {/* <Image
               source={backimage}
               style={{
                 height: StatusBar.currentHeight + 5,
@@ -139,54 +138,60 @@ const Python = ({ navigation }) => {
                 
               }}
             ></Image> */}
-            <Text style={styles.backButton}  onPress={() => {
+          <Text
+            style={styles.backButton}
+            onPress={() => {
               navigation.navigate("Message");
-            }}>{'<'}</Text>
+            }}
+          >
+            {"<"}
+          </Text>
           {/* </TouchableOpacity> */}
           <Text style={styles.navbartext}>Python</Text>
-         
-          </View>
-          
+        </View>
+
         <View style={styles.container}>
-        
-       
-        <View>
-          
+          <View></View>
+          <View>
+            <Text style={{ fontWeight: "800", fontSize: 40, marginBottom: 25 }}>
+              LEVELS
+            </Text>
+          </View>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => {
+              setLevel("easy");
+            }}
+          >
+            <Text style={{ fontWeight: "400", fontSize: 30, color: "white" }}>
+              Easy
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={lastLevel >= 0 ? styles.Button : styles.disabledbutton}
+            onPress={() => {
+              if (lastLevel >= 0) {
+                setLevel("medium");
+              }
+            }}
+          >
+            <Text style={{ fontWeight: "400", fontSize: 30, color: "white" }}>
+              Medium
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={lastLevel >= 1 ? styles.Button : styles.disabledbutton}
+            onPress={() => {
+              if (lastLevel >= 1) {
+                setLevel("hard");
+              }
+            }}
+          >
+            <Text style={{ fontWeight: "400", fontSize: 30, color: "white" }}>
+              Hard
+            </Text>
+          </TouchableOpacity>
         </View>
-        <View>
-          <Text style={{ fontWeight: "800", fontSize: 40, marginBottom: 25 }}>
-            LEVELS
-          </Text>
-        </View>
-        <TouchableOpacity
-          style={styles.Button}
-          onPress={() => {
-            setLevel("easy");
-          }}
-        >
-          <Text style={{ fontWeight: "400", fontSize: 30,color:"white" }}>Easy</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={lastLevel >= 0 ? styles.Button : styles.disabledbutton}
-          onPress={() => {
-            if (lastLevel >= 0) {
-              setLevel("medium");
-            }
-          }}
-        >
-          <Text style={{ fontWeight: "400", fontSize: 30,color:"white" }}>Medium</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={lastLevel >= 1 ? styles.Button : styles.disabledbutton}
-          onPress={() => {
-            if (lastLevel >= 1) {
-              setLevel("hard");
-            }
-          }}
-        >
-          <Text style={{ fontWeight: "400", fontSize: 30,color:"white"}}>Hard</Text>
-        </TouchableOpacity>
-      </View>
       </SafeAreaView>
     );
   } else {
@@ -207,33 +212,30 @@ const Python = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  maincontainer:{
-    flex:1,
-  
+  maincontainer: {
+    flex: 1,
   },
-  navbar:{
-    flexDirection:"row",
-    backgroundColor:"purple",
-    gap:120,
-    alignContent:"center"
+  navbar: {
+    flexDirection: "row",
+    backgroundColor: "purple",
+    gap: 120,
+    alignContent: "center",
   },
-  navbartext:{
-        paddingTop: StatusBar.currentHeight,
-        fontSize: 25,
-        color:"white",
-        fontWeight:"bold",
-        marginLeft:10
-               
+  navbartext: {
+    paddingTop: StatusBar.currentHeight,
+    fontSize: 25,
+    color: "white",
+    fontWeight: "bold",
+    marginLeft: 10,
   },
   backButton: {
     paddingTop: StatusBar.currentHeight,
-        fontSize: 40,
-        color:"white",
-        marginLeft:15,
-        marginTop:-10,
-        opacity: 0.8,
-        fontWeight:150
-   
+    fontSize: 40,
+    color: "white",
+    marginLeft: 15,
+    marginTop: -10,
+    opacity: 0.8,
+    fontWeight: 150,
   },
   container: {
     flex: 1,

@@ -10,8 +10,8 @@ import {
 import React, { useEffect, useState } from "react";
 import gif from "../../../../assets/6ob.gif";
 import AsyncStorage from "@react-native-community/async-storage";
-import { sub } from "react-native-reanimated";
-import { server } from "../../../utils/credentials";
+// import { sub } from "react-native-reanimated";
+import { server } from "../../../utils/Credentials";
 
 const screenHeight = Dimensions.get("window").height;
 const screenWidth = Dimensions.get("window").width;
@@ -74,9 +74,11 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
     return (
       <View style={styles.container}>
         {/* <ImageBackground source={gif} resizeMode="stretch" style={styles.img}> */}
-          <Text style={{fontSize: 30,fontWeight:"bold"}}>You Score is less than 60%</Text>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+          You Score is less than 60%
+        </Text>
 
-          <Text style={{fontSize: 30,fontWeight:"bold"}}>Level: {level}</Text>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>Level: {level}</Text>
         {/* </ImageBackground> */}
       </View>
     );
@@ -91,12 +93,12 @@ export default function Analysis({ subject, Score, Totalquestion, level }) {
     return (
       <View style={styles.container}>
         <ImageBackground source={gif} resizeMode="stretch" style={styles.img}>
-          <Text
-            style={{ fontSize: 40, fontWeight: "800",marginBottom:40}}
-          >
+          <Text style={{ fontSize: 40, fontWeight: "800", marginBottom: 40 }}>
             Congratulations!{" "}
           </Text>
-          <Text style={{fontSize: 30,fontWeight:"bold"}}>You earned a new Badge</Text>
+          <Text style={{ fontSize: 30, fontWeight: "bold" }}>
+            You earned a new Badge
+          </Text>
 
           {/* <Text>Score :{Score}</Text>
           <Text>Totalquestion: {Totalquestion}</Text>

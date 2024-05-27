@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "medi",
-    "slug": "medi",
-    "version": "1.0.0",
+    "name": "TechHack",
+    "slug": "TechHack",
+    "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/badges/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+     
+      "backgroundColor": "#800080"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/techHackicon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hack7.TechHack"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d3905779-d85f-47f6-8c9d-a2a542a8ac8a"
+      }
     }
   }
 }

@@ -6,20 +6,17 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  Platform,
   Image,
-  Modal,
-  Alert,
-  Pressable,
 } from "react-native";
-import GetLocation from "react-native-get-location";
+// import GetLocation from "react-native-get-location";
 import SideMenu from "react-native-side-menu-updated";
-import MapView from "react-native-maps";
+// import MapView from "react-native-maps";
 import LandingScreen from "./LandingScreen";
 import LeftheaderItems from "./LeftheaderItems";
 import { useState, useEffect } from "react";
-import { TextInput } from "react-native-gesture-handler";
+// import { TextInput } from "react-native-gesture-handler";
 import Slideshow from "react-native-image-slider-show";
+// import ImageSlider from "react-native-image-slider";
 
 export default function Message({ navigation }) {
   const menu = <LeftheaderItems navigation={navigation} />;
@@ -64,7 +61,6 @@ export default function Message({ navigation }) {
         style={{
           flex: 1,
           backgroundColor: "white",
-          paddingTop:  StatusBar.currentHeight ,
         }}
       >
         <View
@@ -93,64 +89,8 @@ export default function Message({ navigation }) {
               style={styles.icon}
             ></Image>
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            style={{
-              width: "12%",
-              height: "15%",
-
-              elevation: 3,
-              zIndex: 3,
-            }}
-            onPress={() => {
-              setModalVisible(true);
-            }}
-          >
-            <Image
-              source={require("../../assets/add-group.png")}
-              style={styles.icon}
-            ></Image>
-          </TouchableOpacity>
-
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Pressable
-                  style={[styles.button, styles.buttonClose]}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Text style={styles.textStyle}>Hide Modal</Text>
-                </Pressable>
-
-                <TextInput
-                  placeholder="Group Name"
-                  style={styles.input}
-                ></TextInput>
-                <TouchableOpacity></TouchableOpacity>
-              </View>
-            </View>
-          </Modal> */}
         </View>
-        {/* <View>
-          <SliderBox
-            images={images}
-            dotColor="white"
-            inactiveDotColor="black"
-            dotStyle={{ height: 20, width: 20, borderRadius: 50 }}
-            // imageLoadingColor="black"
-            autoplay={true}
-            autoplayInterval={4000}
-            circleLoop={true}
-            onCurrentImagePressed={(index) => alert(index + 1)}
-            firstItem={4}
-          />
-        </View> */}
+
         <ScrollView>
           <View
             style={{
@@ -170,20 +110,6 @@ export default function Message({ navigation }) {
             />
           </View>
           <LandingScreen navigation={navigation} />
-
-          {/* <View style={styles.container}>
-        <MapView
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        /> */}
         </ScrollView>
       </SafeAreaView>
     </SideMenu>

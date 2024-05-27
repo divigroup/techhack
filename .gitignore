@@ -9,9 +9,15 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-credentials.*
+
 # macOS
 .DS_Store
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build

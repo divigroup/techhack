@@ -15,8 +15,8 @@ import {
   service_id,
   template_id,
   public_key,
-} from "../utils/credentials";
-import { authorizationToken } from "../utils/credentials";
+} from "../utils/Credentials";
+import { authorizationToken } from "../utils/Credentials";
 export default function ForgetPassword({ navigation }) {
   const courier = CourierClient({
     authorizationToken: authorizationToken,

@@ -13,14 +13,14 @@ import Answer from "./Answer";
 import { Svg, Circle, Text as SvgText } from "react-native-svg";
 
 import Analysis from "./Analysis";
-import { server } from "../../../utils/credentials";
+import { server } from "../../../utils/Credentials";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 const Quiztemp = ({ level, subject }) => {
   const [questions, setQuestion] = useState([{}]);
-  console.log(subject, level);
+  // console.log(subject, level);
   const ques = async () => {
     await fetch(`${server + "question"} `, {
       method: "POST",

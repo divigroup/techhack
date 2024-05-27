@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
-import { server } from "../utils/credentials";
+import { server } from "../utils/Credentials";
 
 export default function LoginVerification({ navigation }) {
   const [navigatePage, setNavigate] = useState("");

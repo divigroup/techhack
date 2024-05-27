@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { server } from "../utils/credentials";
+import { server } from "../utils/Credentials";
 
 export default function Afterotp({ route, navigation }) {
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function Afterotp({ route, navigation }) {
             gap: 1,
           }}
         >
-            <Text
+          <Text
             style={{
               color: "black",
               fontSize: 40,
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 2,
     width: "90%",
-    height:"15%",
+    height: "15%",
     marginBottom: 15,
     alignItems: "center",
     backgroundColor: "white",

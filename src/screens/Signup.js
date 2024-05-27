@@ -9,18 +9,16 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Dimensions,
   Alert,
-  ActivityIndicator 
+  ActivityIndicator,
+  TextInput,
 } from "react-native";
 import { useState } from "react";
 import Dialog, { DialogContent } from "react-native-popup-dialog";
-import { TextInput } from "react-native-gesture-handler";
-import { server } from "../utils/credentials";
-import { authorizationToken } from "../utils/credentials";
+// import {  } from "react-native-gesture-handler";
+import { server } from "../utils/Credentials";
+import { authorizationToken } from "../utils/Credentials";
 import { CourierClient } from "@trycourier/courier";
-
-
 
 export default function Signup({ navigation }) {
   const courier = CourierClient({
@@ -31,7 +29,7 @@ export default function Signup({ navigation }) {
   const [receivedotp, setReceivedotp] = useState("");
   const [sentotp, setsentotp] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [loading,setloading]=useState(false)
+  const [loading, setloading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -76,10 +74,9 @@ export default function Signup({ navigation }) {
     // Do something with the password, e.g. validate it
     // console.log("Submitting password:", password);
     // Hide the modal
-   
-  
+
     if (sentotp == receivedotp) {
-      setloading(true)
+      setloading(true);
       const payload = {
         firstName,
         lastName,
@@ -97,17 +94,17 @@ export default function Signup({ navigation }) {
           try {
             const jsonRes = await res.json();
             if (res.status !== 200) {
-              console.log("repeat");
+              // console.log("repeat");
             } else {
-              setloading(false)
+              setloading(false);
               setdialog(true);
             }
           } catch (err) {
             if (res.status === 422) {
-              setloading(false)
+              setloading(false);
               setError("Email already registered");
             } else {
-              setloading(false)
+              setloading(false);
               setError("Sorry, Server Error Try Again in a while");
             }
             setAllfielderror(true);
@@ -125,7 +122,6 @@ export default function Signup({ navigation }) {
   const handleChangeText = (text) => {
     // Ensure the password only contains 4 digits
     setReceivedotp(String(text));
- 
   };
 
   const [firstName, setfirstName] = useState("");
@@ -140,8 +136,8 @@ export default function Signup({ navigation }) {
         <View
           style={{
             alignItems: "center",
-          
-            paddingBottom:30,
+
+            paddingBottom: 30,
             gap: 1,
           }}
         >
@@ -166,6 +162,7 @@ export default function Signup({ navigation }) {
                     Cancel
                   </Text>
                 </TouchableOpacity>
+                {loading ? <ActivityIndicator size="large" /> : <></>}
                 <TouchableOpacity
                   onPress={() => handleOtpSubmit()}
                   style={styles.modelbutton}
@@ -178,44 +175,48 @@ export default function Signup({ navigation }) {
             </View>
           </Modal>
           <Dialog
-            visible={dialog }
+            visible={dialog}
             onTouchOutside={() => {
               setdialog(false);
             }}
           >
             <View style={{ padding: 10 }}>
-              {!loading?
+              {!loading ? (
+                <DialogContent
+                  style={{
+                    width: "100%",
+                    padding: 4,
+                    alignItems: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  <Text style={{ fontSize: 30 }}>Registration success</Text>
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {
+                      setdialog(false);
+                    }}
+                  >
+                    <Text>Ok</Text>
+                  </TouchableOpacity>
+                </DialogContent>
+              ) : (
+                <DialogContent
+                  style={{ width: "100%", padding: 4, alignItems: "center" }}
+                >
+                  <Text style={{ fontSize: 30 }}>Registration in progress</Text>
+                  <ActivityIndicator size="large" />
+                </DialogContent>
+              )}
+            </View>
+          </Dialog>
+          <Dialog visible={loading}>
+            <View style={{ padding: 10 }}>
               <DialogContent
                 style={{ width: "100%", padding: 4, alignItems: "center" }}
               >
-                <Text style={{ fontSize: 30 }}>Registration success</Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                    
-                    setdialog(false);
-                  }}
-                >
-                  <Text>Ok</Text>
-                </TouchableOpacity>
-              </DialogContent>:<DialogContent
-                style={{ width: "100%", padding: 4, alignItems: "center" }}
-              >
                 <Text style={{ fontSize: 30 }}>Registration in progress</Text>
-             <ActivityIndicator size="large" />
-              </DialogContent>}
-            </View>
-          </Dialog>
-          <Dialog
-            visible={loading}
-            
-          >
-            <View style={{ padding: 10 }}>
-             <DialogContent
-                style={{ width: "100%", padding: 4, alignItems: "center" }}
-              >
-                <Text style={{ fontSize: 30 }}>Registration in progress</Text>
-             <ActivityIndicator size="large" />
+                <ActivityIndicator size="large" />
               </DialogContent>
             </View>
           </Dialog>
@@ -255,23 +256,32 @@ export default function Signup({ navigation }) {
             placeholder="Email"
             onChangeText={setEmail}
           />
-        
+
           <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        secureTextEntry={isPasswordVisible}
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Enter your password"
-      />
-      <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
-        {!isPasswordVisible ? (
-          <Image source={require('../../assets/view.png')} style={{ width: 24, height: 24 }} />
-        ) : (
-          <Image source={require('../../assets/hide.png')} style={{ width: 24, height: 24 }} />
-        )}
-      </TouchableOpacity>
-    </View>
+            <TextInput
+              style={styles.textInput}
+              secureTextEntry={isPasswordVisible}
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Enter your password"
+            />
+            <TouchableOpacity
+              onPress={togglePasswordVisibility}
+              style={styles.eyeIcon}
+            >
+              {!isPasswordVisible ? (
+                <Image
+                  source={require("../../assets/view.png")}
+                  style={{ width: 24, height: 24 }}
+                />
+              ) : (
+                <Image
+                  source={require("../../assets/hide.png")}
+                  style={{ width: 24, height: 24 }}
+                />
+              )}
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -282,16 +292,16 @@ export default function Signup({ navigation }) {
               Register
             </Text>
           </TouchableOpacity>
-          <View style={{zIndex:100}}>
-          <Text  style={{}}>
-            Have an account?{" "}
-            <Text
-              style={{ color: "purple", fontWeight: "bold"}}
-              onPress={() => navigation.navigate("Login")}
-            >
-              Login
+          <View style={{ zIndex: 100 }}>
+            <Text style={{}}>
+              Have an account?{" "}
+              <Text
+                style={{ color: "purple", fontWeight: "bold" }}
+                onPress={() => navigation.navigate("Login")}
+              >
+                Login
+              </Text>
             </Text>
-          </Text>
           </View>
         </View>
       </ScrollView>
@@ -302,9 +312,8 @@ export default function Signup({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight * 3,
+    paddingTop: StatusBar.currentHeight * 2,
     backgroundColor: "white",
-    height: "100%", 
   },
   scrollView: {
     marginHorizontal: 20,
@@ -396,8 +405,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-   inputContainer: {
- padding: 10,
+  inputContainer: {
+    padding: 10,
     marginVertical: 2,
     marginLeft: -2,
     width: "91%",
@@ -410,19 +419,17 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 15,
 
-    flexDirection: 'row',
-    alignItems: 'center',
-   
-   
+    flexDirection: "row",
+    alignItems: "center",
+
     padding: 10,
-   
   },
   textInput: {
     flex: 1,
     height: 40,
   },
   eyeIcon: {
-    position: 'absolute',
-    right: 10,
+    position: "absolute",
+    right: 12,
   },
 });

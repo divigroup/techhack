@@ -15,7 +15,7 @@ export default function PasswordReset({ route, navigation }) {
   const [error, setError] = useState("");
   // console.log(otp, "otp");
   const [errorflag, setErrorflag] = useState(true);
-  console.log(email);
+  // console.log(email);
   const [i1, seti1] = useState(0);
   const [i2, seti2] = useState(0);
   const [i3, seti3] = useState(0);
@@ -30,30 +30,30 @@ export default function PasswordReset({ route, navigation }) {
       if (otpwritten === String(otp)) {
         navigation.navigate("afterotp", { email: email });
       } else {
-        console.log("bhag");
+        // console.log("bhag");
       }
     }
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{
-            alignItems: "center",
-            paddingVertical: 10,
-            gap: 1,
-          }}>
+      <View
+        style={{
+          alignItems: "center",
+          paddingVertical: 10,
+          gap: 1,
+        }}
+      >
         <Text
-            style={{
-              color: "black",
-              fontSize: 40,
-              fontWeight: "bold",
-              marginBottom: 80,
-            }}
-          >
-            TechHack
-          </Text>
-          <Text style={{fontSize: 30,fontWeight:"bold"}}>
-            Sign in
-          </Text>
+          style={{
+            color: "black",
+            fontSize: 40,
+            fontWeight: "bold",
+            marginBottom: 80,
+          }}
+        >
+          TechHack
+        </Text>
+        <Text style={{ fontSize: 30, fontWeight: "bold" }}>Sign in</Text>
         {errorflag ? <Text style={{ color: "red" }}>{error}</Text> : <></>}
       </View>
       <View style={styles.contentcontainer}>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     padding: 13,
     paddingHorizontal: 30,
     marginTop: 15,
-    marginLeft:10,
+    marginLeft: 10,
     width: "50%",
     color: "white",
     alignSelf: "center",

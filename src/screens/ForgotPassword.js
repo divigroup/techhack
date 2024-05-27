@@ -1,5 +1,4 @@
-
-import React from 'react'
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -10,15 +9,15 @@ import {
   StatusBar,
   Image,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { TextInput } from "react-native-gesture-handler";
 
 export default function ForgotPassword() {
   return (
     <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-            <View
+      <ScrollView style={styles.scrollView}>
+        <View
           style={{
             alignItems: "center",
             paddingVertical: 10,
@@ -55,8 +54,8 @@ export default function ForgotPassword() {
           >
             <Text style={{ color: "white", textAlign: "center" }}>Send</Text>
           </TouchableOpacity>
-          </View>
-        </ScrollView>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

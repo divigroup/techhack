@@ -10,11 +10,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Alert,
+  TextInput,
 } from "react-native";
 import { useState, useEffect } from "react";
-import { TextInput } from "react-native-gesture-handler";
+
 import AsyncStorage from "@react-native-community/async-storage";
-import { server } from "../utils/credentials";
+import { server } from "../utils/Credentials";
 export default function Login({ navigation }) {
   const [clicked, setclicked] = useState(false);
   const Boiler = async () => {
@@ -34,7 +35,7 @@ export default function Login({ navigation }) {
       setErrorflag(true);
       setclicked(false);
     } else {
-      console.log("entered");
+      // console.log("entered");
       fetch(`${server + "login"} `, {
         method: "POST",
         headers: {
